@@ -17,7 +17,7 @@ public class Teacher {
         this.pw = pw;
     }
 
-    public void call(Student student, Task task) {
+    public void call(Student student, Task... task) {
         student.addTask(task);
     }
 }
