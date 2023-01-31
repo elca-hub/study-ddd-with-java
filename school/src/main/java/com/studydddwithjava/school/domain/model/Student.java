@@ -5,12 +5,14 @@ import java.util.ArrayList;
 public class Student {
     private final int MAX_TASK_COUNT = 10;
 
-    private String name;
+    private final String id;
+    private UserName name;
     private int year;
     private int classCode;
     private final ArrayList<Task> tasks = new ArrayList<Task>();
 
-    public Student(String name, int year, int classCode) {
+    public Student(String id, UserName name, int year, int classCode) {
+        this.id = id;
         this.name = name;
         this.year = year;
         this.classCode = classCode;
