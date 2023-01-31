@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.*;
 public class ModelTest {
     @Test
     @DisplayName("教員モデルを用いて生徒モデルにタスクを付与")
-    void testTeacherControl() throws Exception {
+    void testTeacherControl() throws IllegalArgumentException {
         UserName teacherName = new UserName("Domain-Driven", "Design");
         Teacher teacher = new Teacher("teacher-id", teacherName, "passwordpassword");
 
