@@ -18,10 +18,10 @@ public class Student {
         this.classCode = classCode;
     }
 
-    public void addTask(Task... tasks) {
+    public void addTask(Task task) {
         if (this.tasks.size() >= this.MAX_TASK_COUNT) return;
 
-        for(Task task: tasks) this.tasks.add(task);
+        this.tasks.add(task);
     }
 
     public ArrayList<Task> getTasks() {
