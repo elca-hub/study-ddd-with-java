@@ -1,4 +1,4 @@
-package com.studydddwithjava.school.domain.model;
+package com.studydddwithjava.school.domain.model.task;
 
 public class Task {
     private String title;

@@ -1,4 +1,4 @@
-package com.studydddwithjava.school.domain.model;
+package com.studydddwithjava.school.domain.model.user;
 
 public class UserName {
     private final String firstName;
