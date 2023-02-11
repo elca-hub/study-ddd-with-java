@@ -19,7 +19,6 @@ public class SchoolController {
 
     @PostMapping("/login")
     public String login(@RequestParam("teacherName") String name, @RequestParam("teacherPw") String pw) {
-        
         return "index";
     }
 }
