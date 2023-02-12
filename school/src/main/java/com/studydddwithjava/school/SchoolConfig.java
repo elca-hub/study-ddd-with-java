@@ -9,6 +9,6 @@ public class SchoolConfig implements WebMvcConfigurer {
     public void addViewController(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("home");
         registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/auth/*").setViewName("auth");
+        registry.addViewController("/auth/**").setViewName("auth");
     }
 }

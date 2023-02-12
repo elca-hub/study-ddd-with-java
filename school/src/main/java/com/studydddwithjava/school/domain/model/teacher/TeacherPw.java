@@ -9,6 +9,7 @@ public class TeacherPw {
         if (pw.length() < MIN_PW_LEN || pw.length() > MAX_PW_LEN) {
             throw new IllegalArgumentException(String.format("Password length must be between %d and %d characters.", MIN_PW_LEN, MAX_PW_LEN));
         }
+
         this.pw = pw;
     }
 

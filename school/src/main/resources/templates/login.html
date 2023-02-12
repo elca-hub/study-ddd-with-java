@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="~{fragment/head.html}"></th:block>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div class="main-title mb-4">
+    <h1>School Management</h1>
+    <h2>教員向けの生徒管理システム</h2>
+</div>
+<div th:if="${param.error}">
+    ログインに失敗しました
+    <div th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">
+        <span th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}"></span>
+    </div>
+</div>
+<div class="content mt-4">
+    <form method="post" th:action="@{/login}">
+        <div class="mb-3">
+            <label for="teacherFirstName" class="form-label">姓</label>
+            <input type="text" class="form-control" id="teacherFirstName" placeholder="苗字" name="firstname">
+        </div>
+        <div class="mb-3">
+            <label for="teacherFirstName" class="form-label">名</label>
+            <input type="text" class="form-control" id="teacherLastName" placeholder="名前" name="lastname">
+        </div>
+        <div class="mb-3">
+            <label for="teacherPw" class="form-label">パスワード</label>
+            <input type="text" class="form-control" id="teacherPw" placeholder="パスワード" name="pw">
+        </div>
+        <input type="hidden" id="userName" name="username">
+        <button type="submit" class="btn btn-primary">確定</button>
+    </form>
+</div>
+<script src="/js/login.js"></script>
+</body>
+</html>

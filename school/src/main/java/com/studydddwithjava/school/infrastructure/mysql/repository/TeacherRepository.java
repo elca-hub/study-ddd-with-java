@@ -9,7 +9,9 @@ import com.studydddwithjava.school.infrastructure.mysql.entity.TeacherDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Repository("mysql")
 public class TeacherRepository implements ITeacherRepository {
@@ -37,5 +39,24 @@ public class TeacherRepository implements ITeacherRepository {
                 new UserName(model.firstname, model.lastname),
                 new TeacherPw(model.pw)
         );
+    }
+
+    @Override
+    public Optional<Teacher> findByUserName(UserName username) {
+        List<TeacherDataModel> models = teacherContext.findByFirstnameAndLastname(username.getFirstName(), username.getLastName());
+
+        if (models.size() >= 2) throw new IllegalStateException("Duplicate password and teacher name.");
+
+        if (models.size() == 0) {
+            return Optional.of(null);
+        }
+
+        TeacherDataModel model = models.get(0);
+
+        return Optional.of(new Teacher(
+                model.id,
+                username,
+                new TeacherPw(model.pw)
+        ));
     }
 }

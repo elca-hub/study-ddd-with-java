@@ -4,12 +4,14 @@ import com.studydddwithjava.school.domain.model.user.UserName;
 import com.studydddwithjava.school.domain.model.student.Student;
 import com.studydddwithjava.school.domain.model.task.Task;
 
+import java.util.List;
 import java.util.UUID;
 
 public class Teacher {
     private final String id;
     private UserName name;
     private TeacherPw pw;
+    private List<String> roleList = List.of("teacher");
 
     public Teacher(String id, UserName name, TeacherPw pw) {
         this.id = id;
@@ -53,5 +55,9 @@ public class Teacher {
 
     public TeacherPw getPw() {
         return pw;
+    }
+
+    public List<String> getRoleList() {
+        return roleList;
     }
 }

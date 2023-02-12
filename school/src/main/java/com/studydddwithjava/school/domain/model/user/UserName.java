@@ -21,7 +21,7 @@ public class UserName {
     }
 
     public String getFullName() {
-        return this.firstName + this.lastName;
+        return String.format("%s %s", this.firstName, this.lastName);
     }
 
     public String getFirstName() { return firstName; }

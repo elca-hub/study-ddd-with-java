@@ -12,7 +12,7 @@ public class TeacherDataModel {
     @Column
     public String id;
 
-    @Column(length = 50, nullable = false)
+    @Column(nullable = false)
     public String pw;
 
     @Column(length = 25, nullable = false)

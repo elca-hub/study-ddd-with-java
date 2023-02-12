@@ -24,16 +24,13 @@ public class SchoolController {
         return "index";
     }
 
-    @PostMapping("/login")
-    public String login(
-            @RequestParam("teacherFirstName") String firstName,
-            @RequestParam("teacherLastName") String lastName,
-            @RequestParam("teacherPw") String pw
-    ) {
-        boolean res = teacherApplicationService.login(firstName, lastName, pw);
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 
-        System.out.println(res);
-
-        return "index";
+    @GetMapping("/auth/")
+    public String AuthHome() {
+        return "auth/home";
     }
 }
