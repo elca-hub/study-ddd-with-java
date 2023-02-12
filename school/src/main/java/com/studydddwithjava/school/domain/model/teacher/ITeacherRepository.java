@@ -1,5 +1,5 @@
 package com.studydddwithjava.school.domain.model.teacher;
 
-interface ITeacherRepository {
-    public boolean isExist(Teacher teacher);
+public interface ITeacherRepository {
+    Teacher findByUserNameAndPw(Teacher teacher);
 }

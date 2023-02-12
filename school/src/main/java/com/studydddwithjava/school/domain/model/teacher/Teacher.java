@@ -7,9 +7,6 @@ import com.studydddwithjava.school.domain.model.task.Task;
 import java.util.UUID;
 
 public class Teacher {
-    private final int MIN_PW_LEN = 16;
-    private final int MAX_PW_LEN = 32;
-
     private final String id;
     private UserName name;
     private TeacherPw pw;
@@ -44,5 +41,17 @@ public class Teacher {
      */
     public void addTask(Student student, Task task) {
         student.addTask(task);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public UserName getName() {
+        return name;
+    }
+
+    public TeacherPw getPw() {
+        return pw;
     }
 }
