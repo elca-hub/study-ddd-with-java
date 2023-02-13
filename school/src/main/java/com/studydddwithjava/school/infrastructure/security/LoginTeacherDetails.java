@@ -8,11 +8,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Collection;
 
-public class LoginUserDetails implements UserDetails {
+public class LoginTeacherDetails implements UserDetails {
     private final Teacher teacher;
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public LoginUserDetails(Teacher teacher) {
+    public LoginTeacherDetails(Teacher teacher) {
         this.teacher = teacher;
         this.authorities = teacher.getRoleList().stream().map(role -> new SimpleGrantedAuthority(role)).toList();
     }

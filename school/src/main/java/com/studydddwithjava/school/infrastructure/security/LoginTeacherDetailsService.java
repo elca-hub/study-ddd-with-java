@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class LoginUserDetailsService implements UserDetailsService {
+public class LoginTeacherDetailsService implements UserDetailsService {
     @Autowired
     @Qualifier("mysql")
     private ITeacherRepository teacherRepository;
@@ -26,6 +26,6 @@ public class LoginUserDetailsService implements UserDetailsService {
 
         if (findTeacher.isEmpty()) throw new UsernameNotFoundException("user not found.");
 
-        return new LoginUserDetails(findTeacher.get());
+        return new LoginTeacherDetails(findTeacher.get());
     }
 }
