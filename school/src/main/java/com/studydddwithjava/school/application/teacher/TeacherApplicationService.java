@@ -3,7 +3,7 @@ package com.studydddwithjava.school.application.teacher;
 import com.studydddwithjava.school.domain.model.teacher.ITeacherRepository;
 import com.studydddwithjava.school.domain.model.teacher.Teacher;
 import com.studydddwithjava.school.domain.model.teacher.TeacherPw;
-import com.studydddwithjava.school.domain.model.teacher.TeacherService;
+import com.studydddwithjava.school.domain.service.TeacherService;
 import com.studydddwithjava.school.domain.model.user.UserName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
