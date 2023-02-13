@@ -20,12 +20,15 @@ public class LoginTeacherDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println(username.length());
-        String[] nameArr = username.split(" ", 2); // フルネームで取得するので、firstnameとlastnameに分割
-        Optional<Teacher> findTeacher = teacherRepository.findByUserName(new UserName(nameArr[0], nameArr[1]));
+        try {
+            String[] nameArr = username.split(" ", 2); // フルネームで取得するので、firstnameとlastnameに分割
+            Optional<Teacher> findTeacher = teacherRepository.findByUserName(new UserName(nameArr[0], nameArr[1]));
 
-        if (findTeacher.isEmpty()) throw new UsernameNotFoundException("user not found.");
+            if (findTeacher.isEmpty()) throw new UsernameNotFoundException("user not found.");
 
-        return new LoginTeacherDetails(findTeacher.get());
+            return new LoginTeacherDetails(findTeacher.get());
+        } catch (Exception e) {
+            throw new UsernameNotFoundException("user not found.", e);
+        }
     }
 }
