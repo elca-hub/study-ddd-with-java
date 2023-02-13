@@ -1,12 +1,17 @@
 package com.studydddwithjava.school;
 
 import com.studydddwithjava.school.application.teacher.TeacherApplicationService;
+import com.studydddwithjava.school.application.teacher.TeacherData;
+import com.studydddwithjava.school.infrastructure.security.LoginTeacherDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.Optional;
 
 @Controller
 public class SchoolController {
@@ -26,7 +31,18 @@ public class SchoolController {
     }
 
     @GetMapping("/auth/")
-    public String AuthHome() {
+    public String AuthHome(
+            @AuthenticationPrincipal LoginTeacherDetails teacherDetails,
+            Model model
+    ) {
+        Optional<TeacherData> optTeacher = teacherApplicationService.findByUserName(teacherDetails.getUsername());
+
+        if (optTeacher.isEmpty()) return "redirect:/login?error";
+
+        TeacherData teacher = optTeacher.get();
+
+        model.addAttribute("teacher", teacher);
+
         return "auth/home";
     }
 }
