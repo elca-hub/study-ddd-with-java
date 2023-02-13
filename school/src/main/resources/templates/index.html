@@ -1,29 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragment/head :: head_fragment('School Management | home', ~{::link}, ~{::script})}">
-    <link rel="stylesheet" href="/css/index.css">
-</head>
+    <head>
+        <th:block th:insert="~{fragment/head.html}"></th:block>
+        <link rel="stylesheet" href="/css/index.css">
+    </head>
 <body>
 <div class="main-title mb-4">
     <h1>School Management</h1>
     <h2>教員向けの生徒管理システム</h2>
 </div>
 <div class="content mt-4">
-    <form method="post" action="/login">
-        <div class="mb-3">
-            <label for="teacherFirstName" class="form-label">姓</label>
-            <input type="text" class="form-control" id="teacherFirstName" placeholder="教員名" name="teacherFirstName">
-        </div>
-        <div class="mb-3">
-            <label for="teacherLastName" class="form-label">名</label>
-            <input type="text" class="form-control" id="teacherLastName" placeholder="教員名" name="teacherLastName">
-        </div>
-        <div class="mb-3">
-            <label for="teacherPw" class="form-label">パスワード</label>
-            <input type="text" class="form-control" id="teacherPw" placeholder="パスワード" name="teacherPw">
-        </div>
-        <button type="submit" class="btn btn-primary">確定</button>
-    </form>
+    <a href="/login">ログイン画面へ</a>
 </div>
 </body>
 </html>

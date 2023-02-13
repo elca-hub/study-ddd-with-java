@@ -1,5 +1,7 @@
-package com.studydddwithjava.school.domain.model.teacher;
+package com.studydddwithjava.school.domain.service;
 
+import com.studydddwithjava.school.domain.model.teacher.ITeacherRepository;
+import com.studydddwithjava.school.domain.model.teacher.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

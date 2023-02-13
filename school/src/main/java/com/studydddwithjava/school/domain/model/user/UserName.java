@@ -16,12 +16,16 @@ public class UserName {
             throw new IllegalArgumentException(String.format("Last name length must be between %d and %d characters.", MIN_NAME_LEN, MAX_NAME_LEN));
         }
 
+        if (firstName.indexOf(" ") != -1 || lastName.indexOf(" ") != -1) {
+            throw new IllegalArgumentException("User name cannot contain spaces.");
+        }
+
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
     public String getFullName() {
-        return this.firstName + this.lastName;
+        return String.format("%s %s", this.firstName, this.lastName);
     }
 
     public String getFirstName() { return firstName; }

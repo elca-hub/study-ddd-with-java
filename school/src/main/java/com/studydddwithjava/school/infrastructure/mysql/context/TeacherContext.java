@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface TeacherContext extends JpaRepository<TeacherDataModel, String> {
     List<TeacherDataModel> findByFirstnameAndLastnameAndPw(String firstname, String lastname, String pw);
+    List<TeacherDataModel> findByFirstnameAndLastname(String firstname, String lastname);
 }
