@@ -58,7 +58,7 @@ public class SchoolController {
                 e.printStackTrace();
             }
 
-            return  "redirect:/auth/";
+            return "redirect:/auth/";
         }
 
         return "redirect:/signup?error";
