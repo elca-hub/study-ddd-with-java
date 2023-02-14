@@ -20,4 +20,7 @@ public class TeacherDataModel {
 
     @Column(length = 25, nullable = false)
     public String lastname;
+
+    @Column(length = 50, nullable = false)
+    public String username;
 }
