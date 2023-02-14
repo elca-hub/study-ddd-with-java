@@ -9,6 +9,9 @@
     <h1>School Management</h1>
     <h2>サインアップ</h2>
 </div>
+<div th:if="${param.error}">
+    サインアップに失敗しました。
+</div>
 <div class="content mt-4">
     <form method="post" th:action="@{/signup}">
         <div class="mb-3">
