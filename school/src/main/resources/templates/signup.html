@@ -7,16 +7,10 @@
 <body>
 <div class="main-title mb-4">
     <h1>School Management</h1>
-    <h2>ログイン</h2>
-</div>
-<div th:if="${param.error}">
-    ログインに失敗しました
-    <div th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">
-        <span th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}"></span>
-    </div>
+    <h2>サインアップ</h2>
 </div>
 <div class="content mt-4">
-    <form method="post" th:action="@{/login}">
+    <form method="post" th:action="@{/signup}">
         <div class="mb-3">
             <label for="teacherFirstName" class="form-label">姓</label>
             <input type="text" class="form-control" id="teacherFirstName" placeholder="苗字" name="firstname">
@@ -29,10 +23,8 @@
             <label for="teacherPw" class="form-label">パスワード</label>
             <input type="text" class="form-control" id="teacherPw" placeholder="パスワード" name="pw">
         </div>
-        <input type="hidden" id="userName" name="username">
         <button type="submit" class="btn btn-primary">確定</button>
     </form>
 </div>
-<script src="/js/login.js"></script>
 </body>
 </html>

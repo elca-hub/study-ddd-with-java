@@ -1,5 +1,6 @@
 package com.studydddwithjava.school.infrastructure.mysql.entity;
 
+import com.studydddwithjava.school.domain.model.teacher.Teacher;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -23,4 +24,13 @@ public class TeacherDataModel {
 
     @Column(length = 50, nullable = false)
     public String username;
+
+    public TeacherDataModel() {}
+    public TeacherDataModel(Teacher teacher) {
+        this.id = teacher.getId();
+        this.pw = teacher.getHashPw().getHash();
+        this.firstname = teacher.getName().getFirstName();
+        this.lastname = teacher.getName().getLastName();
+        this.username = teacher.getName().getFirstName();
+    }
 }

@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface ITeacherRepository {
     Teacher findByUserNameAndPw(Teacher teacher);
     Optional<Teacher> findByUserName(UserName username);
+
+    void save(Teacher teacher);
 }

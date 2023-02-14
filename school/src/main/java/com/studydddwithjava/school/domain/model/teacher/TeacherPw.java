@@ -2,7 +2,7 @@ package com.studydddwithjava.school.domain.model.teacher;
 
 public class TeacherPw {
     private final String pw;
-    private final int MIN_PW_LEN = 16;
+    private final int MIN_PW_LEN = 4;
     private final int MAX_PW_LEN = 32;
 
     public TeacherPw(String pw) {

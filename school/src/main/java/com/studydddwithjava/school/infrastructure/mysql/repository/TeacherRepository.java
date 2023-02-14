@@ -60,4 +60,10 @@ public class TeacherRepository implements ITeacherRepository {
                 new TeacherHashPw(model.pw) /* TODO: ハッシュ値であるmodel.pwをTeacherPwとして代入してしまっている */
         ));
     }
+
+    @Override
+    public void save(Teacher teacher) {
+        TeacherDataModel model = new TeacherDataModel(teacher);
+        teacherContext.save(model);
+    }
 }
