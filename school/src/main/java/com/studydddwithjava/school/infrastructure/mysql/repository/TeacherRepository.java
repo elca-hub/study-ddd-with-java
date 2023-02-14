@@ -3,7 +3,6 @@ package com.studydddwithjava.school.infrastructure.mysql.repository;
 import com.studydddwithjava.school.domain.model.teacher.ITeacherRepository;
 import com.studydddwithjava.school.domain.model.teacher.Teacher;
 import com.studydddwithjava.school.domain.model.teacher.TeacherHashPw;
-import com.studydddwithjava.school.domain.model.teacher.TeacherPw;
 import com.studydddwithjava.school.domain.model.user.UserName;
 import com.studydddwithjava.school.infrastructure.mysql.context.TeacherContext;
 import com.studydddwithjava.school.infrastructure.mysql.entity.TeacherDataModel;
@@ -20,10 +19,12 @@ public class TeacherRepository implements ITeacherRepository {
 
     @Override
     public Teacher findByUserNameAndPw(Teacher teacher) {
+        if (teacher.getPw().isEmpty()) throw new IllegalStateException();
+
         List<TeacherDataModel> models = teacherContext.findByFirstnameAndLastnameAndPw(
                 teacher.getName().getFirstName(),
                 teacher.getName().getLastName(),
-                teacher.getPw().getPw()
+                teacher.getPw().get().getPw()
         );
 
         if (models.size() >= 2) throw new IllegalStateException("Duplicate password and teacher name.");
@@ -48,7 +49,7 @@ public class TeacherRepository implements ITeacherRepository {
         if (models.size() >= 2) throw new IllegalStateException("Duplicate password and teacher name.");
 
         if (models.size() == 0) {
-            return Optional.of(null);
+            return Optional.empty();
         }
 
         TeacherDataModel model = models.get(0);

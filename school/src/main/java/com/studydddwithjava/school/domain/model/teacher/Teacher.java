@@ -5,14 +5,15 @@ import com.studydddwithjava.school.domain.model.student.Student;
 import com.studydddwithjava.school.domain.model.task.Task;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class Teacher {
     private final String id;
-    private UserName name;
-    private TeacherPw pw;
-    private List<String> roleList = List.of("teacher");
-    private TeacherHashPw hashPw;
+    private final UserName name;
+    private final TeacherPw pw;
+    private final List<String> roleList = List.of("teacher");
+    private final TeacherHashPw hashPw;
 
     public Teacher(String id, UserName name, TeacherPw pw) {
         this.id = id;
@@ -46,15 +47,6 @@ public class Teacher {
         }
     }
 
-    /**
-     * 一人の生徒に一つのタスクを付与するメソッド
-     * @param student 対象の生徒
-     * @param task 付与するタスク
-     */
-    public void addTask(Student student, Task task) {
-        student.addTask(task);
-    }
-
     public String getId() {
         return id;
     }
@@ -63,8 +55,8 @@ public class Teacher {
         return name;
     }
 
-    public TeacherPw getPw() {
-        return pw;
+    public Optional<TeacherPw> getPw() {
+        return Optional.ofNullable(pw);
     }
 
     public List<String> getRoleList() {
