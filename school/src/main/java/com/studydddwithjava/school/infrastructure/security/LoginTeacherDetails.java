@@ -14,12 +14,12 @@ public class LoginTeacherDetails implements UserDetails {
 
     public LoginTeacherDetails(Teacher teacher) {
         this.teacher = teacher;
-        this.authorities = teacher.getRoleList().stream().map(role -> new SimpleGrantedAuthority(role)).toList();
+        this.authorities = teacher.getRoleList().stream().map(SimpleGrantedAuthority::new).toList();
     }
 
     @Override
     public String getPassword() {
-        return new BCryptPasswordEncoder().encode(teacher.getPw().getPw());
+        return teacher.getHashPw().getHash();
     }
 
     @Override

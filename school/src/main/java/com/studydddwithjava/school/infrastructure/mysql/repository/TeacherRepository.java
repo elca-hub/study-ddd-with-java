@@ -2,6 +2,7 @@ package com.studydddwithjava.school.infrastructure.mysql.repository;
 
 import com.studydddwithjava.school.domain.model.teacher.ITeacherRepository;
 import com.studydddwithjava.school.domain.model.teacher.Teacher;
+import com.studydddwithjava.school.domain.model.teacher.TeacherHashPw;
 import com.studydddwithjava.school.domain.model.teacher.TeacherPw;
 import com.studydddwithjava.school.domain.model.user.UserName;
 import com.studydddwithjava.school.infrastructure.mysql.context.TeacherContext;
@@ -36,7 +37,7 @@ public class TeacherRepository implements ITeacherRepository {
         return new Teacher(
                 model.id,
                 new UserName(model.firstname, model.lastname),
-                new TeacherPw(model.pw)
+                new TeacherHashPw(model.pw)
         );
     }
 
@@ -55,7 +56,7 @@ public class TeacherRepository implements ITeacherRepository {
         return Optional.of(new Teacher(
                 model.id,
                 username,
-                new TeacherPw(model.pw)
+                new TeacherHashPw(model.pw) /* TODO: ハッシュ値であるmodel.pwをTeacherPwとして代入してしまっている */
         ));
     }
 }

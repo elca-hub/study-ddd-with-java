@@ -6,6 +6,10 @@ public class TeacherPw {
     private final int MAX_PW_LEN = 32;
 
     public TeacherPw(String pw) {
+        /*
+            TODO: ガード節を除外しないとTeacherRepositoryでのエンティティ生成時、
+             ハッシュ値をpwとして代入してしまいIllegalArgumentExceptionをthrowしてしまう
+         */
         if (pw.length() < MIN_PW_LEN || pw.length() > MAX_PW_LEN) {
             throw new IllegalArgumentException(String.format("Password length must be between %d and %d characters.", MIN_PW_LEN, MAX_PW_LEN));
         }

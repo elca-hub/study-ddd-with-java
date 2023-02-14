@@ -12,17 +12,27 @@ public class Teacher {
     private UserName name;
     private TeacherPw pw;
     private List<String> roleList = List.of("teacher");
+    private TeacherHashPw hashPw;
 
     public Teacher(String id, UserName name, TeacherPw pw) {
         this.id = id;
         this.name = name;
         this.pw = pw;
+        this.hashPw = new TeacherHashPw(pw);
     }
 
     public Teacher(UserName name, TeacherPw pw) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.pw = pw;
+        this.hashPw = new TeacherHashPw(pw);
+    }
+
+    public Teacher(String id, UserName name, TeacherHashPw hashPw) {
+        this.id = id;
+        this.name = name;
+        this.pw = null;
+        this.hashPw = hashPw;
     }
 
     /**
@@ -59,5 +69,9 @@ public class Teacher {
 
     public List<String> getRoleList() {
         return roleList;
+    }
+
+    public TeacherHashPw getHashPw() {
+        return hashPw;
     }
 }
