@@ -31,6 +31,6 @@ public class TeacherDataModel {
         this.pw = teacher.getHashPw().getHash();
         this.firstname = teacher.getName().getFirstName();
         this.lastname = teacher.getName().getLastName();
-        this.username = teacher.getName().getFirstName();
+        this.username = teacher.getName().getFullName();
     }
 }
