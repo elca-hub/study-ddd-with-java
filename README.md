@@ -6,6 +6,20 @@ javaを用いたドメイン駆動設計のお勉強
 - 実際のwebアプリの構築を通じて、ドメイン駆動設計の学習を行う
 - Java特有のメソッドや構造などを理解する
 
+## 構成
+
+|フォルダ名|内容|
+| :--: | :--: |
+| db-server | dockerを用いたDB構築 |
+| school | Spring Bootのプロジェクト |
+
+## 使用しているツール
+
+- Docker
+- Intellij idea
+- Sourcetree
+- DBeaver
+
 ## TODO
 
 - [ ] グループの作成
