@@ -22,7 +22,7 @@ public class TeacherDataModel {
     @Column(length = 25, nullable = false)
     public String lastname;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 100, nullable = false)
     public String username;
 
     public TeacherDataModel() {}
