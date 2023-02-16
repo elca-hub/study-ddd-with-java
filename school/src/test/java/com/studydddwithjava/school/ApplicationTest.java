@@ -43,6 +43,16 @@ public class ApplicationTest {
         assertThat(td.get().getUserName(), is(username));
     }
 
+    @Test
+    @DisplayName("異なるpwだと削除できないか")
+    void testCannotDeleteWrongPw() {
+        String wrongPw = "wrongpw!";
+
+        boolean res = teacherApplicationService.delete(firstname, lastname, wrongPw);
+
+        assertThat(res, is(false));
+    }
+
     @AfterEach
     public void remove() {
         teacherApplicationService.delete(firstname, lastname, rawPw);

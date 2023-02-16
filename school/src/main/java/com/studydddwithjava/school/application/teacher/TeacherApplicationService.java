@@ -73,7 +73,7 @@ public class TeacherApplicationService {
         return name.getFullName();
     }
 
-    public void delete(String firstname, String lastname, String pw) {
+    public boolean delete(String firstname, String lastname, String pw) {
         UserName username = new UserName(firstname, lastname);
         Optional<Teacher> find = teacherRepository.findByUserName(username);
 
@@ -82,6 +82,10 @@ public class TeacherApplicationService {
 
             boolean isMatch = teacher.getHashPw().match(new TeacherPw(pw));
             if (isMatch) teacherRepository.delete(teacher);
+
+            return isMatch;
         }
+
+        return false;
     }
 }
