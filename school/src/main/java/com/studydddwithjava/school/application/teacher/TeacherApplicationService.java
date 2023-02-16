@@ -2,6 +2,7 @@ package com.studydddwithjava.school.application.teacher;
 
 import com.studydddwithjava.school.domain.model.teacher.ITeacherRepository;
 import com.studydddwithjava.school.domain.model.teacher.Teacher;
+import com.studydddwithjava.school.domain.model.teacher.TeacherHashPw;
 import com.studydddwithjava.school.domain.model.teacher.TeacherPw;
 import com.studydddwithjava.school.domain.service.TeacherService;
 import com.studydddwithjava.school.domain.model.user.UserName;
@@ -70,5 +71,17 @@ public class TeacherApplicationService {
         UserName name = new UserName(firstname, lastname);
 
         return name.getFullName();
+    }
+
+    public void delete(String firstname, String lastname, String pw) {
+        UserName username = new UserName(firstname, lastname);
+        Optional<Teacher> find = teacherRepository.findByUserName(username);
+
+        if (find.isPresent()) {
+            Teacher teacher = find.get();
+
+            boolean isMatch = teacher.getHashPw().match(new TeacherPw(pw));
+            if (isMatch) teacherRepository.delete(teacher);
+        }
     }
 }

@@ -66,4 +66,9 @@ public class TeacherRepository implements ITeacherRepository {
         TeacherDataModel model = new TeacherDataModel(teacher);
         teacherContext.save(model);
     }
+
+    public void delete(Teacher teacher) {
+        TeacherDataModel model = new TeacherDataModel(teacher);
+        teacherContext.delete(model);
+    }
 }

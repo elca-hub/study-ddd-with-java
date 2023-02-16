@@ -9,4 +9,5 @@ public interface ITeacherRepository {
     Optional<Teacher> findByUserName(UserName username);
 
     void save(Teacher teacher);
+    void delete(Teacher teacher);
 }
