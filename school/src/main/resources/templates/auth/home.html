@@ -7,11 +7,14 @@
 <body>
 <div class="main-title mb-4">
     <h1>School Management</h1>
-    <h2>教員向けの生徒管理システム</h2>
+    <h2>ようこそ、<th:blok th:text="${teacher.lastName}" />さん</h2>
 </div>
 <div class="content mt-4">
-    <p>Well done!</p>
-    <p th:text="${#authentication.name}"></p>
+    <ul>
+        <li>
+            <a href="/auth/group/new">グループの作成</a>
+        </li>
+    </ul>
 </div>
 <form th:action="@{/logout}" method="post">
     <button type="submit" class="btn btn-primary">ログアウト</button>

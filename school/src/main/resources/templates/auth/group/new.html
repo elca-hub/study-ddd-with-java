@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="~{fragment/head.html}"></th:block>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div class="main-title mb-4">
+    <h1>School Management</h1>
+    <h2>グループ作成画面</h2>
+</div>
+<div class="content mt-4">
+    <form action="@{/auth/group/register}" method="post">
+        <div class="mb-3">
+            <label for="groupName" class="form-label">グループ名</label>
+            <input type="text" class="form-control" id="groupName" placeholder="グループ名" name="groupName">
+        </div>
+        <!-- TODO: 追加する生徒を選択するフォームの作成 -->
+        <button type="submit" class="btn btn-primary">新規作成</button>
+    </form>
+</div>
+<form th:action="@{/logout}" method="post">
+    <button type="submit" class="btn btn-primary">ログアウト</button>
+</form>
+</body>
+</html>
