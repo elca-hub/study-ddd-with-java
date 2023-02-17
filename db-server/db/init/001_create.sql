@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS teachers(
 	PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4;
 
-CREATE TABLE IF NOT EXISUTS students (
+CREATE TABLE IF NOT EXISTS students (
 	id varchar(255) NOT NULL,
 	firstname varchar(25) NOT NULL,
 	lastname varchar(25) NOT NULL,
