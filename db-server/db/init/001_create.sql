@@ -9,3 +9,15 @@ CREATE TABLE IF NOT EXISTS teachers(
 	username varchar(50) NOT NULL,
 	PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4;
+
+CREATE TABLE IF NOT EXISUTS students (
+	id varchar(255) NOT NULL,
+	firstname varchar(25) NOT NULL,
+	lastname varchar(25) NOT NULL,
+	username varchar(100) NOT NULL,
+	student_number int NOT NULL,
+	PRIMARY KEY (id),
+	UNIQUE KEY (student_number)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4;
