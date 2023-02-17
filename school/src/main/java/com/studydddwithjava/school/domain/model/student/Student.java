@@ -1,6 +1,6 @@
 package com.studydddwithjava.school.domain.model.student;
 
-import com.studydddwithjava.school.domain.model.group.Group;
+import com.studydddwithjava.school.domain.model.team.Team;
 import com.studydddwithjava.school.domain.model.task.Task;
 import com.studydddwithjava.school.domain.model.user.UserName;
 
@@ -12,19 +12,19 @@ public class Student {
 
     private final String id;
     private UserName name;
-    private Group group;
+    private Team team;
     private final ArrayList<Task> tasks = new ArrayList<Task>();
 
-    public Student(String id, UserName name, Group group) {
+    public Student(String id, UserName name, Team team) {
         this.id = id;
         this.name = name;
-        this.group = group;
+        this.team = team;
     }
 
-    public Student(UserName name, Group group) {
+    public Student(UserName name, Team team) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
-        this.group = group;
+        this.team = team;
     }
 
     public void addTask(Task task) {

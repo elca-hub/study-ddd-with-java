@@ -1,7 +1,7 @@
 package com.studydddwithjava.school;
 
-import com.studydddwithjava.school.domain.model.group.Group;
-import com.studydddwithjava.school.domain.model.group.GroupName;
+import com.studydddwithjava.school.domain.model.team.Team;
+import com.studydddwithjava.school.domain.model.team.GroupName;
 import com.studydddwithjava.school.domain.model.student.Student;
 import com.studydddwithjava.school.domain.model.task.Task;
 import com.studydddwithjava.school.domain.model.teacher.Teacher;
@@ -21,10 +21,10 @@ public class ModelTest {
         Teacher teacher = new Teacher("teacher-id", teacherName, tp);
 
         GroupName groupName = new GroupName("test-group");
-        Group group = new Group(groupName);
+        Team team = new Team(groupName);
 
         UserName studentName = new UserName("ado", "asmi");
-        Student student = new Student("student-id", studentName, group);
+        Student student = new Student("student-id", studentName, team);
 
         Task testTask = new Task("Come to 3F3", "I know you broke all window of the school. I'll talk with you.");
 

@@ -1,4 +1,4 @@
-package com.studydddwithjava.school.domain.model.group;
+package com.studydddwithjava.school.domain.model.team;
 
 public class GroupName {
     private final int MAX_GROUP_NAME_LEN = 60;

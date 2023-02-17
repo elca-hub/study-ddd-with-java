@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class LoginTeacherDetailsService implements UserDetailsService {
     @Autowired
-    @Qualifier("mysql")
+    @Qualifier("mysql-teacher")
     private ITeacherRepository teacherRepository;
 
     @Override

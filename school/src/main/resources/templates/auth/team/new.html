@@ -10,7 +10,7 @@
     <h2>グループ作成画面</h2>
 </div>
 <div class="content mt-4">
-    <form action="@{/auth/group/register}" method="post">
+    <form th:action="@{/auth/team/register}" method="post">
         <div class="mb-3">
             <label for="groupName" class="form-label">グループ名</label>
             <input type="text" class="form-control" id="groupName" placeholder="グループ名" name="groupName">

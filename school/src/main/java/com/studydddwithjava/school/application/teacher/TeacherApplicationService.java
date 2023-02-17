@@ -17,7 +17,7 @@ import java.util.Optional;
 public class TeacherApplicationService {
 
     @Autowired
-    @Qualifier("mysql")
+    @Qualifier("mysql-teacher")
     private ITeacherRepository teacherRepository;
 
     @Autowired

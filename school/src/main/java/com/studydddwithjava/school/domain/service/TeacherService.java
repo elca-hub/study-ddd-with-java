@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class TeacherService {
 
     @Autowired
-    @Qualifier("mysql")
+    @Qualifier("mysql-teacher")
     private ITeacherRepository teacherRepository;
 
     public Teacher login(Teacher teacher) {
