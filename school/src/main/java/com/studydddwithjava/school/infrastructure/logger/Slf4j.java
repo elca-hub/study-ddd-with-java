@@ -1,6 +1,6 @@
 package com.studydddwithjava.school.infrastructure.logger;
 
-import com.studydddwithjava.school.SchoolController;
+import com.studydddwithjava.school.controllers.SchoolController;
 import com.studydddwithjava.school.application.shared.ILogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
