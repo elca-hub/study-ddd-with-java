@@ -26,16 +26,15 @@ public class TeamController {
     private ILogger logger;
 
     @GetMapping("/new")
-    public String index(Model model) {
+    public String newTeam(Model model) {
         return "/auth/team/new";
     }
 
     @PostMapping("/register")
-    public String index(
+    public String register(
             @AuthenticationPrincipal LoginTeacherDetails teacherDetails,
             @RequestParam String groupName
     ) {
-
         teamApplicationService.register(groupName, teacherDetails.getUsername());
 
         return "redirect:/auth/";

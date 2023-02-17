@@ -4,19 +4,19 @@ import java.util.UUID;
 
 public class Team {
     private final String id;
-    private GroupName name;
+    private TeamName name;
 
-    public Team(String id, GroupName name) {
+    public Team(String id, TeamName name) {
         this.id = id;
         this.name = name;
     }
 
-    public Team(GroupName name) {
+    public Team(TeamName name) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
     }
 
-    public GroupName getName() {
+    public TeamName getName() {
         return name;
     }
 

@@ -24,7 +24,8 @@ public class WebSecurityConfig {
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/auth/**").authenticated()
-                        .anyRequest().permitAll()
+                        .requestMatchers("/signup").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
