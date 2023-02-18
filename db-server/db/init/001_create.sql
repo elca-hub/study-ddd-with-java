@@ -39,3 +39,14 @@ CREATE TABLE IF NOT EXISTS teacher_team_membership (
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS student_team_membership (
+	id int auto_increment NOT NULL,
+	student_id varchar(255) NOT NULL,
+	team_id varchar(255) NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (student_id) REFERENCES school_management.students(id),
+	FOREIGN KEY (team_id) REFERENCES school_management.teams(id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4;
