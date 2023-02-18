@@ -19,11 +19,11 @@
     <form method="post" th:action="@{/login}">
         <div class="mb-3">
             <label for="teacherFirstName" class="form-label">姓</label>
-            <input type="text" class="form-control" id="teacherFirstName" placeholder="苗字" name="firstname">
+            <input type="text" class="form-control" id="teacherFirstName" placeholder="苗字" name="firstname" autocomplete="family-name">
         </div>
         <div class="mb-3">
             <label for="teacherFirstName" class="form-label">名</label>
-            <input type="text" class="form-control" id="teacherLastName" placeholder="名前" name="lastname">
+            <input type="text" class="form-control" id="teacherLastName" placeholder="名前" name="lastname" autocomplete="given-name">
         </div>
         <div class="mb-3">
             <label for="teacherPw" class="form-label">パスワード</label>
