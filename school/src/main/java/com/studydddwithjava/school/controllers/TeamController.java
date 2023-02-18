@@ -37,7 +37,12 @@ public class TeamController {
             @AuthenticationPrincipal LoginTeacherDetails teacherDetails
     ) {
         if (result.hasErrors()) return "redirect:/auth/team/new?error";
-        teamApplicationService.register(teamRegisterParam.getGroupName(), teacherDetails.getUsername());
+        try {
+            teamApplicationService.register(teamRegisterParam.getGroupName(), teacherDetails.getUsername());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/auth/team/new?error";
+        }
 
         return "redirect:/auth/";
     }

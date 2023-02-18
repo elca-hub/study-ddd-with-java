@@ -25,7 +25,7 @@ public class TeamApplicationService {
     private ITeacherRepository teacherRepository;
 
     @Transactional
-    public void register(String groupName, String teacherName) {
+    public void register(String groupName, String teacherName) throws IllegalArgumentException {
         Team team = new Team(new TeamName(groupName));
         Optional<Teacher> opt = teacherRepository.findByUserName(new UserName(teacherName));
 
