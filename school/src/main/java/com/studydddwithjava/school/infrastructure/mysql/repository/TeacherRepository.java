@@ -58,7 +58,7 @@ public class TeacherRepository implements ITeacherRepository {
         return Optional.of(new Teacher(
                 model.id,
                 username,
-                new TeacherHashPw(model.pw) /* TODO: ハッシュ値であるmodel.pwをTeacherPwとして代入してしまっている */
+                new TeacherHashPw(model.pw)
         ));
     }
 
