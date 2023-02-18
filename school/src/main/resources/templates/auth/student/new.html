@@ -13,11 +13,11 @@
     <form th:action="@{/auth/student/register}" method="post">
         <div class="mb-3">
             <label for="studentFirstName" class="form-label">生徒名（姓）</label>
-            <input type="text" class="form-control" id="studentFirstName" placeholder="生徒の姓" name="firstName">
+            <input type="text" class="form-control" id="studentFirstName" placeholder="生徒の姓" name="firstname">
         </div>
         <div class="mb-3">
             <label for="studentLastName" class="form-label">生徒名（名）</label>
-            <input type="text" class="form-control" id="studentLastName" placeholder="生徒の名" name="lastName">
+            <input type="text" class="form-control" id="studentLastName" placeholder="生徒の名" name="lastname">
         </div>
         <select class="form-select" aria-label="Team select list" name="groupId">
             <option
@@ -33,7 +33,7 @@
             <input type="text" class="form-control" id="studentNumber" placeholder="番号" name="studentNumber">
         </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="isAutoInc" name="isAutoInc">
+            <input class="form-check-input" type="checkbox" id="isAutoInc" name="autoInc">
             <label class="form-check-label" for="isAutoInc">自動的に番号を登録する</label>
             <div class="form-text">ONにすると上記の番号が無効化され、現在登録されている番号の最大値に1加算した値を自動的に登録します</div>
         </div>
