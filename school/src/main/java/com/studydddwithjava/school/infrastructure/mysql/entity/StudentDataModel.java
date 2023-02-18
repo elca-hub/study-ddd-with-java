@@ -1,5 +1,7 @@
 package com.studydddwithjava.school.infrastructure.mysql.entity;
 
+import com.studydddwithjava.school.domain.model.student.Student;
+import com.studydddwithjava.school.domain.model.teacher.Teacher;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -26,4 +28,15 @@ public class StudentDataModel {
 
     @Column(nullable = false, name = "teacher_id")
     public String teacherId;
+
+    public StudentDataModel() {}
+
+    public StudentDataModel(Student student) {
+        this.id = student.getId();
+        this.studentNumber = student.getStudentNumber();
+        this.firstname = student.getName().getFirstName();
+        this.lastname = student.getName().getLastName();
+        this.username = student.getName().getFullName();
+        this.teacherId = student.getTeacher().map(Teacher::getId).orElse(null);
+    }
 }

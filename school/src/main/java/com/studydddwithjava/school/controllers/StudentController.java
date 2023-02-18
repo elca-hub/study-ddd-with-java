@@ -1,5 +1,6 @@
 package com.studydddwithjava.school.controllers;
 
+import com.studydddwithjava.school.application.student.StudentApplicationService;
 import com.studydddwithjava.school.application.student.param.StudentRegisterParam;
 import com.studydddwithjava.school.application.team.TeamApplicationService;
 import com.studydddwithjava.school.application.shared.ILogger;
@@ -21,6 +22,9 @@ import java.util.List;
 public class StudentController {
     @Autowired
     private TeamApplicationService teamApplicationService;
+
+    @Autowired
+    private StudentApplicationService studentApplicationService;
 
     @Autowired
     @Qualifier("slf4j")
@@ -47,7 +51,13 @@ public class StudentController {
     ) {
         if (result.hasErrors()) return "redirect:/auth/student/new?error";
 
+        try {
+            studentApplicationService.register(studentRegisterParam, teacherDetails.getUsername());
+        } catch (Exception e) {
+            e.printStackTrace();
 
+            return "redirect:/auth/student/new?error";
+        }
 
         return "redirect:/auth/";
     }

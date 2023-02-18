@@ -1,30 +1,41 @@
 package com.studydddwithjava.school.domain.model.student;
 
+import com.studydddwithjava.school.domain.model.teacher.Teacher;
 import com.studydddwithjava.school.domain.model.team.Team;
 import com.studydddwithjava.school.domain.model.task.Task;
 import com.studydddwithjava.school.domain.model.user.UserName;
+import lombok.Data;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.UUID;
 
+@Data
 public class Student {
     private final int MAX_TASK_COUNT = 10;
 
     private final String id;
     private UserName name;
     private Team team;
+    private int studentNumber;
+    private Teacher teacher;
     private final ArrayList<Task> tasks = new ArrayList<Task>();
 
-    public Student(String id, UserName name, Team team) {
+    public Student(String id, UserName name, int studentNumber, Team team, Teacher teacher) {
         this.id = id;
         this.name = name;
+        this.studentNumber = studentNumber;
         this.team = team;
+        this.teacher = teacher;
     }
 
-    public Student(UserName name, Team team) {
+    public Student(UserName name, int studentNumber, Team team, Teacher teacher) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
+        this.studentNumber = studentNumber;
         this.team = team;
+        this.teacher = teacher;
     }
 
     public void addTask(Task task) {
@@ -35,5 +46,9 @@ public class Student {
 
     public ArrayList<Task> getTasks() {
         return this.tasks;
+    }
+
+    public Optional<Teacher> getTeacher() {
+        return Optional.ofNullable(this.teacher);
     }
 }
