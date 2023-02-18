@@ -5,9 +5,8 @@ import com.studydddwithjava.school.domain.model.team.Team;
 import com.studydddwithjava.school.domain.model.team.TeamName;
 import com.studydddwithjava.school.domain.model.team.ITeamRepository;
 import com.studydddwithjava.school.infrastructure.mysql.context.TeamContext;
-import com.studydddwithjava.school.infrastructure.mysql.context.UsingTeamContext;
+import com.studydddwithjava.school.infrastructure.mysql.context.TeacherTeamMembership;
 import com.studydddwithjava.school.infrastructure.mysql.entity.TeamDataModel;
-import com.studydddwithjava.school.infrastructure.mysql.entity.UsingTeamDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +19,7 @@ public class TeamRepository implements ITeamRepository {
     private TeamContext teamContext;
 
     @Autowired
-    private UsingTeamContext usingTeamContext;
+    private TeacherTeamMembership teacherTeamMembership;
     @Override
     public Optional<Team> findByName(TeamName name) {
         Optional<TeamDataModel> opt = teamContext.findByName(name.getName());
@@ -31,19 +30,19 @@ public class TeamRepository implements ITeamRepository {
     @Override
     public void save(Teacher teacher, Team team) {
         TeamDataModel teamDataModel = new TeamDataModel(team);
-        UsingTeamDataModel usingTeamDataModel = new UsingTeamDataModel(teacher, team);
+        com.studydddwithjava.school.infrastructure.mysql.entity.TeacherTeamMembership teacherTeamMembership = new com.studydddwithjava.school.infrastructure.mysql.entity.TeacherTeamMembership(teacher, team);
 
         teamContext.save(teamDataModel);
-        usingTeamContext.save(usingTeamDataModel);
+        teacherTeamMembership.save(teacherTeamMembership);
     }
 
     @Override
     public List<Team> findByTeacher(Teacher teacher) {
-        List<UsingTeamDataModel> usingModels = usingTeamContext.findByTeacherId(teacher.getId());
+        List<com.studydddwithjava.school.infrastructure.mysql.entity.TeacherTeamMembership> usingModels = teacherTeamMembership.findByTeacherId(teacher.getId());
 
         List<Team> res = new java.util.ArrayList<>(List.of());
 
-        for (UsingTeamDataModel model : usingModels) {
+        for (com.studydddwithjava.school.infrastructure.mysql.entity.TeacherTeamMembership model : usingModels) {
             Optional<TeamDataModel> opt = teamContext.findById(model.teamId);
 
             if (opt.isPresent()) {

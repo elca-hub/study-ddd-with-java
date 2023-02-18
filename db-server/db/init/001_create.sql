@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS teams (
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS using_teams (
+CREATE TABLE IF NOT EXISTS teacher_team_membership (
 	id int auto_increment NOT NULL,
 	teacher_id varchar(255) NOT NULL,
 	team_id varchar(255) NOT NULL,

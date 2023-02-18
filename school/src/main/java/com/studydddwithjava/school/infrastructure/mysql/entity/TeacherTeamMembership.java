@@ -5,8 +5,8 @@ import com.studydddwithjava.school.domain.model.team.Team;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "using_teams")
-public class UsingTeamDataModel {
+@Table(name = "teacher_team_membership")
+public class TeacherTeamMembership {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +18,9 @@ public class UsingTeamDataModel {
     @Column(nullable = false, name = "team_id")
     public String teamId;
 
-    public UsingTeamDataModel() {}
+    public TeacherTeamMembership() {}
 
-    public UsingTeamDataModel(Teacher teacher, Team team) {
+    public TeacherTeamMembership(Teacher teacher, Team team) {
         this.teacherId = teacher.getId();
         this.teamId = team.getId();
     }
