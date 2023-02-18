@@ -35,7 +35,9 @@ CREATE TABLE IF NOT EXISTS teacher_team_membership (
 	id int auto_increment NOT NULL,
 	teacher_id varchar(255) NOT NULL,
 	team_id varchar(255) NOT NULL,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY (teacher_id) REFERENCES teachers(id),
+	FOREGIN KEY (team_id) REFERENCES teams(id)
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4;
