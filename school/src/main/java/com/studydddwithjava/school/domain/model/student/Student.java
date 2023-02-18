@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
+/* TODO: student_numberをstudentsに配置するか、student_team_membershipに配置するか */
 @Data
 public class Student {
     private final int MAX_TASK_COUNT = 10;
