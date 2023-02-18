@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "teacher_team_membership")
-public class TeacherTeamMembership {
+public class TeacherTeamMembershipDataModel {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +18,9 @@ public class TeacherTeamMembership {
     @Column(nullable = false, name = "team_id")
     public String teamId;
 
-    public TeacherTeamMembership() {}
+    public TeacherTeamMembershipDataModel() {}
 
-    public TeacherTeamMembership(Teacher teacher, Team team) {
+    public TeacherTeamMembershipDataModel(Teacher teacher, Team team) {
         this.teacherId = teacher.getId();
         this.teamId = team.getId();
     }
