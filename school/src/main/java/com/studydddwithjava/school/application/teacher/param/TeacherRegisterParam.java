@@ -1,8 +1,8 @@
-package com.studydddwithjava.school.application.team.param;
+package com.studydddwithjava.school.application.teacher.param;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class TeamParam {
+public class TeacherRegisterParam {
     @NotBlank
     private String firstname;
 

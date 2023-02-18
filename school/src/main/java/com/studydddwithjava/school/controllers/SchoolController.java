@@ -2,11 +2,9 @@ package com.studydddwithjava.school.controllers;
 
 import com.studydddwithjava.school.application.shared.ILogger;
 import com.studydddwithjava.school.application.teacher.TeacherApplicationService;
-import com.studydddwithjava.school.application.team.param.TeamParam;
+import com.studydddwithjava.school.application.teacher.param.TeacherRegisterParam;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SchoolController {
@@ -44,16 +41,16 @@ public class SchoolController {
 
     @PostMapping("/signup")
     public String register(
-            @ModelAttribute @Validated TeamParam teamParam,
+            @ModelAttribute @Validated TeacherRegisterParam teacherRegisterParam,
             BindingResult result,
             HttpServletRequest request
     ) {
         if (result.hasErrors()) return "redirect:/signup?error";
 
-        boolean isDone = teacherApplicationService.register(teamParam.getFirstname(), teamParam.getLastname(), teamParam.getPw());
+        boolean isDone = teacherApplicationService.register(teacherRegisterParam.getFirstname(), teacherRegisterParam.getLastname(), teacherRegisterParam.getPw());
         if (isDone) {
             try {
-                request.login(teacherApplicationService.fetchFullName(teamParam.getFirstname(), teamParam.getLastname()), teamParam.getPw());
+                request.login(teacherApplicationService.fetchFullName(teacherRegisterParam.getFirstname(), teacherRegisterParam.getLastname()), teacherRegisterParam.getPw());
             } catch (ServletException e) {
                 e.printStackTrace();
             }
