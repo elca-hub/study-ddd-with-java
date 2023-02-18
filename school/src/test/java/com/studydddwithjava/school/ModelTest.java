@@ -24,7 +24,7 @@ public class ModelTest {
         Team team = new Team(teamName);
 
         UserName studentName = new UserName("ado", "asmi");
-        Student student = new Student("student-id", studentName, team);
+        Student student = new Student("student-id", studentName, 1, team, teacher);
 
         Task testTask = new Task("Come to 3F3", "I know you broke all window of the school. I'll talk with you.");
 
