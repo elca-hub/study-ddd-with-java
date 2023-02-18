@@ -39,7 +39,7 @@ public class TeacherApplicationService {
      * @param pw パスワード
      * @return 登録が完了したか
      */
-    public boolean register(String firstName, String lastName, String pw) {
+    public boolean register(String firstName, String lastName, String pw) throws IllegalArgumentException {
         UserName teacherName = new UserName(firstName, lastName);
         Teacher teacher = new Teacher(teacherName, new TeacherPw(pw));
 

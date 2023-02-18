@@ -47,15 +47,22 @@ public class SchoolController {
     ) {
         if (result.hasErrors()) return "redirect:/signup?error";
 
-        boolean isDone = teacherApplicationService.register(teacherRegisterParam.getFirstname(), teacherRegisterParam.getLastname(), teacherRegisterParam.getPw());
-        if (isDone) {
-            try {
-                request.login(teacherApplicationService.fetchFullName(teacherRegisterParam.getFirstname(), teacherRegisterParam.getLastname()), teacherRegisterParam.getPw());
-            } catch (ServletException e) {
-                e.printStackTrace();
-            }
+        try {
+            boolean isDone = teacherApplicationService.register(teacherRegisterParam.getFirstname(), teacherRegisterParam.getLastname(), teacherRegisterParam.getPw());
+            if (isDone) {
+                try {
+                    request.login(teacherApplicationService.fetchFullName(teacherRegisterParam.getFirstname(), teacherRegisterParam.getLastname()), teacherRegisterParam.getPw());
+                } catch (ServletException e) {
+                    e.printStackTrace();
+                    return "redirect:/login?error";
+                }
 
-            return "redirect:/auth/";
+                return "redirect:/auth/";
+            }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+
+            return "redirect:/signup?error";
         }
 
         return "redirect:/signup?error";
