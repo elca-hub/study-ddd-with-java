@@ -2,6 +2,7 @@ package com.studydddwithjava.school.controllers;
 
 import com.studydddwithjava.school.application.team.TeamApplicationService;
 import com.studydddwithjava.school.application.shared.ILogger;
+import com.studydddwithjava.school.application.team.param.TeamRegisterParam;
 import com.studydddwithjava.school.infrastructure.security.LoginTeacherDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/auth/team")
@@ -32,10 +32,12 @@ public class TeamController {
 
     @PostMapping("/register")
     public String register(
-            @AuthenticationPrincipal LoginTeacherDetails teacherDetails,
-            @RequestParam String groupName
+            @ModelAttribute @Validated TeamRegisterParam teamRegisterParam,
+            BindingResult result,
+            @AuthenticationPrincipal LoginTeacherDetails teacherDetails
     ) {
-        teamApplicationService.register(groupName, teacherDetails.getUsername());
+        if (result.hasErrors()) return "redirect:/auth/team/new?error";
+        teamApplicationService.register(teamRegisterParam.getGroupName(), teacherDetails.getUsername());
 
         return "redirect:/auth/";
     }
