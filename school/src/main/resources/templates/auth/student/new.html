@@ -19,7 +19,7 @@
             <label for="studentLastName" class="form-label">生徒名（名）</label>
             <input type="text" class="form-control" id="studentLastName" placeholder="生徒の名" name="lastname">
         </div>
-        <select class="form-select" aria-label="Team select list" name="groupId">
+        <select class="form-select" aria-label="Team select list" name="teamId">
             <option
                     th:each="team, teamStat : ${teams}"
                     th:value="${team.getId()}"

@@ -15,7 +15,7 @@ public class StudentRegisterParam {
     private String lastname;
 
     @NotBlank
-    private String groupId;
+    private String teamId;
 
     @Positive
     @Min(1)
