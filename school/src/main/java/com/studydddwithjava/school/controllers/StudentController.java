@@ -42,9 +42,12 @@ public class StudentController {
     @PostMapping("/register")
     public String register(
             @ModelAttribute @Validated StudentRegisterParam studentRegisterParam,
+            @AuthenticationPrincipal LoginTeacherDetails teacherDetails,
             BindingResult result
     ) {
         if (result.hasErrors()) return "redirect:/auth/student/new?error";
+
+
 
         return "redirect:/auth/";
     }
