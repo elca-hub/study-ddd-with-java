@@ -19,6 +19,15 @@
             <label for="studentLastName" class="form-label">生徒名（名）</label>
             <input type="text" class="form-control" id="studentLastName" placeholder="生徒の名" name="lastName">
         </div>
+        <select class="form-select" aria-label="Team select list" name="groupId">
+            <option
+                    th:each="team, teamStat : ${teams}"
+                    th:value="${team.getId()}"
+                    th:selected="${teamStat.first}"
+            >
+                <th:block th:text="${team.getName()}" />
+            </option>
+        </select>
         <div class="mb-3">
             <label for="studentNumber" class="form-label">番号</label>
             <input type="text" class="form-control" id="studentNumber" placeholder="番号" name="studentNumber">
