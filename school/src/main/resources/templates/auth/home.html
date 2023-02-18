@@ -14,6 +14,9 @@
         <li>
             <a href="/auth/team/new">グループの作成</a>
         </li>
+        <li th:if="${teams.size() > 0}">
+            <a href="/auth/student/new">生徒の新規登録</a>
+        </li>
     </ul>
 </div>
 

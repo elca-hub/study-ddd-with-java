@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="~{fragment/head.html}"></th:block>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div class="main-title mb-4">
+    <h1>School Management</h1>
+    <h2>生徒の新規登録画面</h2>
+</div>
+<div class="content mt-4">
+    <form th:action="@{/auth/student/register}" method="post">
+        <div class="mb-3">
+            <label for="studentFirstName" class="form-label">生徒名（姓）</label>
+            <input type="text" class="form-control" id="studentFirstName" placeholder="生徒の姓" name="firstName">
+        </div>
+        <div class="mb-3">
+            <label for="studentLastName" class="form-label">生徒名（名）</label>
+            <input type="text" class="form-control" id="studentLastName" placeholder="生徒の名" name="lastName">
+        </div>
+        <div class="mb-3">
+            <label for="studentNumber" class="form-label">番号</label>
+            <input type="text" class="form-control" id="studentNumber" placeholder="番号" name="studentNumber">
+        </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="isAutoInc" name="isAutoInc">
+            <label class="form-check-label" for="isAutoInc">自動的に番号を登録する</label>
+            <div class="form-text">ONにすると上記の番号が無効化され、現在登録されている番号の最大値に1加算した値を自動的に登録します</div>
+        </div>
+        <button type="submit" class="btn btn-primary">新規登録</button>
+    </form>
+</div>
+</body>
+</html>
