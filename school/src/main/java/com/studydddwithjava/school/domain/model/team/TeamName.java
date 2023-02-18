@@ -9,6 +9,11 @@ public class TeamName {
         if (name.length() == 0 || name.length() > MAX_GROUP_NAME_LEN) {
             throw new IllegalArgumentException(String.format("Group name length must be between %d and %d characters.", 0, MAX_GROUP_NAME_LEN));
         }
+
+        if (name.contains(" ")) {
+            throw new IllegalArgumentException("Group name cannot contain spaces.");
+        }
+
         this.name = name;
     }
 
