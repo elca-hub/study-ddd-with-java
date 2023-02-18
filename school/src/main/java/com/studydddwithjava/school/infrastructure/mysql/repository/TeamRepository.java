@@ -11,6 +11,7 @@ import com.studydddwithjava.school.infrastructure.mysql.entity.TeamDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,12 +22,6 @@ public class TeamRepository implements ITeamRepository {
 
     @Autowired
     private TeacherTeamMembershipContext teacherTeamMembershipContext;
-    @Override
-    public Optional<Team> findByName(TeamName name) {
-        Optional<TeamDataModel> opt = teamContext.findByName(name.getName());
-
-        return opt.map(entity -> new Team(entity.id, new TeamName(entity.name)));
-    }
 
     @Override
     public void save(Teacher teacher, Team team) {
@@ -57,5 +52,11 @@ public class TeamRepository implements ITeamRepository {
         }
 
         return res;
+    }
+
+    @Override
+    public Optional<Team> findById(String id) {
+        Optional<TeamDataModel> opt = teamContext.findById(id);
+        return opt.map(model -> new Team(model.id, new TeamName(model.name)));
     }
 }

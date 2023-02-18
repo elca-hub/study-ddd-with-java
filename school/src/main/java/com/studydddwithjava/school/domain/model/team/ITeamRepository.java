@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ITeamRepository {
-    Optional<Team> findByName(TeamName name);
     void save(Teacher teacher, Team team);
 
     List<Team> findByTeacher(Teacher teacher);
+    Optional<Team> findById(String id);
 }
