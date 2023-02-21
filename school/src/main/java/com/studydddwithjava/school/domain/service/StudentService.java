@@ -18,6 +18,11 @@ public class StudentService {
     @Autowired
     private StudentTeamMembershipContext studentTeamMembershipContext;
 
+    /**
+     * studentと等しい名前が同じチーム内にいるかをチェック
+     * @param student 検査する対象
+     * @return studentと同じチームに入っていて名前が等しいstudentがいるか
+     */
     public boolean isExistInTeam(Student student) {
         List<Student> sameTeamStudents = studentRepository.findByTeamId(student.getTeam());
 
