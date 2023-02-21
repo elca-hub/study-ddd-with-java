@@ -22,7 +22,7 @@ public class StudentService {
         List<Student> sameTeamStudents = studentRepository.findByTeamId(student.getTeam());
 
         for (Student target : sameTeamStudents) {
-            if (student.getName().getFullName().equals(target.getName().getFullName())) return true;
+            if (student.getName().equals(target.getName())) return true;
         }
 
         return false;
