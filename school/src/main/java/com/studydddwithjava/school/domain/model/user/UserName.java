@@ -38,6 +38,17 @@ public class UserName {
         this.lastName = lastName;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+
+        if (!(obj instanceof UserName test)) return false;
+
+        if (!(this.getFullName().equals(test.getFullName()))) return false;
+
+        return true;
+    }
+
     public String getFullName() {
         return String.format("%s %s", this.firstName, this.lastName);
     }
