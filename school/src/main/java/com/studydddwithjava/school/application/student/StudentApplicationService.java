@@ -50,12 +50,16 @@ public class StudentApplicationService {
                 teacher
         );
 
-        boolean isExistInTeam = studentService.isExistInTeam(student);
-
-        if (isExistInTeam) throw new IllegalArgumentException("The student with the same name cannot be registered on the same team.");
+        if (studentService.isExistInTeam(student)) {
+            throw new IllegalArgumentException(String.format(
+                    "A student with that name cannot be registered because he/she already exists in the team. Student name: %s",
+                    student.getName().getFullName()));
+        }
 
         if (studentService.isExistStudentNumberInTeam(student)) {
-            throw new IllegalArgumentException("The student with its number cannot be registered on the same team.");
+            throw new IllegalArgumentException(String.format(
+                    "That student number is already in use and cannot be used.¥n Student number: %d",
+                    student.getStudentNumber()));
         }
 
         studentRepository.save(student);
