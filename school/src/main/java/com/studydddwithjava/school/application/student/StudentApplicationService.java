@@ -52,13 +52,13 @@ public class StudentApplicationService {
 
         if (studentService.isExistInTeam(student)) {
             throw new IllegalArgumentException(String.format(
-                    "A student with that name cannot be registered because he/she already exists in the team. Student name: %s",
+                    "A student with that name cannot be registered because he/she already exists in the team.\n Student name: %s",
                     student.getName().getFullName()));
         }
 
         if (studentService.isExistStudentNumberInTeam(student)) {
             throw new IllegalArgumentException(String.format(
-                    "That student number is already in use and cannot be used.¥n Student number: %d",
+                    "That student number is already in use and cannot be used.\n Student number: %d",
                     student.getStudentNumber()));
         }
 
