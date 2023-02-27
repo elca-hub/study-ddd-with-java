@@ -23,7 +23,7 @@ public class StudentDataModel {
     @Column(length = 100, nullable = false)
     public String username;
 
-    @Column(nullable = false, unique = true, name = "student_number")
+    @Column(nullable = false, name = "student_number")
     public int studentNumber;
 
     @Column(nullable = false, name = "teacher_id")
