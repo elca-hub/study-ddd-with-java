@@ -56,15 +56,15 @@ public class StudentApplicationService {
                     student.getName().getFullName()));
         }
 
-        if (studentService.isExistStudentNumberInTeam(student)) {
-            throw new IllegalArgumentException(String.format(
-                    "That student number is already in use and cannot be used.\n Student number: %d",
-                    student.getStudentNumber()));
-        }
-
         if (studentRegisterParam.isAutoInc()) {
             int autoStudentNumber = studentService.makeStudentNumber();
             student.changeStudentNumber(autoStudentNumber);
+        } else {
+            if (studentService.isExistStudentNumberInTeam(student)) {
+                throw new IllegalArgumentException(String.format(
+                        "That student number is already in use and cannot be used.\n Student number: %d",
+                        student.getStudentNumber()));
+            }
         }
 
         studentRepository.save(student);
