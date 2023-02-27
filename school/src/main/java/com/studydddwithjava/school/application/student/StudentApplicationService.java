@@ -52,7 +52,7 @@ public class StudentApplicationService {
 
         boolean isExistInTeam = studentService.isExistInTeam(student);
 
-        if (isExistInTeam) throw new IllegalArgumentException("Students with the same name cannot be registered on the same team.");
+        if (isExistInTeam) throw new IllegalArgumentException("The student with the same name cannot be registered on the same team.");
 
         studentRepository.save(student);
     }
