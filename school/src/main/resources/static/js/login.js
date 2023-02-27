@@ -4,7 +4,6 @@ const usernameEle = document.getElementById("userName");
 
 const changeUserName = () => {
     document.getElementById("userName").value = firstnameEle.value + " " + lastnameEle.value;
-    console.log(document.getElementById("userName").value);
 }
 
 firstnameEle.addEventListener("input", changeUserName);
