@@ -38,4 +38,10 @@ public class StudentService {
 
         return sameStudentNumberMembers.size() != 0;
     }
+
+    public int makeStudentNumber() {
+        int maxStudentNumber = studentRepository.fetchMaxStudentNumber();
+
+        return maxStudentNumber + 1;
+    }
 }

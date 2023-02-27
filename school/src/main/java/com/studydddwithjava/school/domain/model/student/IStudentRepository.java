@@ -9,4 +9,6 @@ public interface IStudentRepository {
 
     List<Student> findByTeamId(Team team);
     List<Student> findByStudentNumber(int studentNumber);
+
+    int fetchMaxStudentNumber();
 }

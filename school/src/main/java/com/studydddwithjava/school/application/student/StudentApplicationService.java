@@ -62,6 +62,11 @@ public class StudentApplicationService {
                     student.getStudentNumber()));
         }
 
+        if (studentRegisterParam.isAutoInc()) {
+            int autoStudentNumber = studentService.makeStudentNumber();
+            student.changeStudentNumber(autoStudentNumber);
+        }
+
         studentRepository.save(student);
     }
 }

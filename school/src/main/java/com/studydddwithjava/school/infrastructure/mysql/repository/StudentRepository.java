@@ -83,4 +83,11 @@ public class StudentRepository implements IStudentRepository {
 
         return res;
     }
+
+    @Override
+    public int fetchMaxStudentNumber() {
+        Optional<StudentDataModel> opt = studentContext.findMaxStudentNumber();
+
+        return opt.map(studentDataModel -> studentDataModel.studentNumber).orElse(0);
+    }
 }
