@@ -54,6 +54,10 @@ public class StudentApplicationService {
 
         if (isExistInTeam) throw new IllegalArgumentException("The student with the same name cannot be registered on the same team.");
 
+        if (studentService.isExistStudentNumberInTeam(student)) {
+            throw new IllegalArgumentException("The student with its number cannot be registered on the same team.");
+        }
+
         studentRepository.save(student);
     }
 }

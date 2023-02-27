@@ -32,4 +32,10 @@ public class StudentService {
 
         return false;
     }
+
+    public boolean isExistStudentNumberInTeam(Student student) {
+        List<Student> sameStudentNumberMembers = studentRepository.findByStudentNumber(student.getStudentNumber());
+
+        return sameStudentNumberMembers.size() != 0;
+    }
 }

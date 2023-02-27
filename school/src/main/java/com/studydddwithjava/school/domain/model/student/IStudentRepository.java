@@ -8,4 +8,5 @@ public interface IStudentRepository {
     void save(Student student);
 
     List<Student> findByTeamId(Team team);
+    List<Student> findByStudentNumber(int studentNumber);
 }

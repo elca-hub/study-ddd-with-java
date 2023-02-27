@@ -2,8 +2,6 @@ package com.studydddwithjava.school.infrastructure.mysql.repository;
 
 import com.studydddwithjava.school.domain.model.student.IStudentRepository;
 import com.studydddwithjava.school.domain.model.student.Student;
-import com.studydddwithjava.school.domain.model.teacher.Teacher;
-import com.studydddwithjava.school.domain.model.teacher.TeacherPw;
 import com.studydddwithjava.school.domain.model.team.Team;
 import com.studydddwithjava.school.domain.model.user.UserName;
 import com.studydddwithjava.school.infrastructure.mysql.context.StudentContext;
@@ -11,7 +9,6 @@ import com.studydddwithjava.school.infrastructure.mysql.context.StudentTeamMembe
 import com.studydddwithjava.school.infrastructure.mysql.context.TeacherContext;
 import com.studydddwithjava.school.infrastructure.mysql.entity.StudentDataModel;
 import com.studydddwithjava.school.infrastructure.mysql.entity.StudentTeamMembershipDataModel;
-import com.studydddwithjava.school.infrastructure.mysql.entity.TeacherDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -63,6 +60,25 @@ public class StudentRepository implements IStudentRepository {
             } else {
                 throw new IllegalStateException();
             }
+        }
+
+        return res;
+    }
+
+    @Override
+    public List<Student> findByStudentNumber(int studentNumber) {
+        List<StudentDataModel> list = studentContext.findByStudentNumber(studentNumber);
+
+        List<Student> res = new ArrayList<>();
+
+        for (StudentDataModel model : list) {
+            res.add(new Student(
+                    model.id,
+                    new UserName(model.firstname, model.lastname),
+                    studentNumber,
+                    null,
+                    null
+            ));
         }
 
         return res;
