@@ -4,6 +4,7 @@ import com.studydddwithjava.school.domain.model.teacher.Teacher;
 import com.studydddwithjava.school.domain.model.team.Team;
 import com.studydddwithjava.school.domain.model.task.Task;
 import com.studydddwithjava.school.domain.model.user.UserName;
+import jakarta.annotation.Nullable;
 import lombok.Data;
 
 import javax.swing.text.html.Option;
@@ -18,8 +19,10 @@ public class Student {
 
     private final String id;
     private UserName name;
+    @Nullable
     private Team team;
     private int studentNumber;
+    @Nullable
     private Teacher teacher;
     private final ArrayList<Task> tasks = new ArrayList<Task>();
 
