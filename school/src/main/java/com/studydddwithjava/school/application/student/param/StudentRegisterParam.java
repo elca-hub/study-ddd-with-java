@@ -1,10 +1,8 @@
 package com.studydddwithjava.school.application.student.param;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 import lombok.Data;
+import org.hibernate.validator.constraints.Range;
 
 @Data
 public class StudentRegisterParam {
@@ -16,6 +14,8 @@ public class StudentRegisterParam {
 
     @NotBlank
     private String teamId;
+
+    @Range(min = 1, max = 200)
     private int studentNumber;
 
     private boolean autoInc;
