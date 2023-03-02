@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component("slf4j")
 public class Slf4j implements ILogger {
-    private Logger logger = LoggerFactory.getLogger(SchoolController.class);
+    private final Logger logger = LoggerFactory.getLogger(SchoolController.class);
 
     @Override
     public void info(String s) {
