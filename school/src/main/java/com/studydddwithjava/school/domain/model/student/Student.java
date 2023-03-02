@@ -15,7 +15,7 @@ import java.util.UUID;
 @Data
 public class Student {
     private final int MAX_TASK_COUNT = 10;
-    private final int STUDENT_MAX_NUMBER = 1000;
+    private final int STUDENT_MAX_NUMBER = 200;
 
     private final String id;
     private UserName name;
