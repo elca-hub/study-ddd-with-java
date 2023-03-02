@@ -16,9 +16,6 @@ public class StudentRegisterParam {
 
     @NotBlank
     private String teamId;
-
-    @Positive
-    @Min(1)
     private int studentNumber;
 
     private boolean autoInc;
