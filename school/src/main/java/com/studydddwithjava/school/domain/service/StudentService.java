@@ -3,6 +3,7 @@ package com.studydddwithjava.school.domain.service;
 import com.studydddwithjava.school.domain.model.student.IStudentRepository;
 import com.studydddwithjava.school.domain.model.student.Student;
 import com.studydddwithjava.school.domain.model.teacher.ITeacherRepository;
+import com.studydddwithjava.school.domain.model.team.Team;
 import com.studydddwithjava.school.infrastructure.mysql.context.StudentTeamMembershipContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,14 +34,12 @@ public class StudentService {
         return false;
     }
 
-    public boolean isExistStudentNumberInTeam(Student student) {
-        List<Student> sameStudentNumberMembers = studentRepository.findByStudentNumber(student.getStudentNumber());
-
-        return sameStudentNumberMembers.size() != 0;
+    public boolean isExistStudentNumberInTeam(Student student, Team team) {
+        return studentRepository.existsSameStudentNumberInTeam(student, team);
     }
 
-    public int makeStudentNumber() {
-        int maxStudentNumber = studentRepository.fetchMaxStudentNumber();
+    public int makeStudentNumber(Team team) {
+        int maxStudentNumber = studentRepository.fetchMaxStudentNumber(team);
 
         return maxStudentNumber + 1;
     }

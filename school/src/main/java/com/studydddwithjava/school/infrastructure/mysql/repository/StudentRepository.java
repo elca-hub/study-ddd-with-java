@@ -9,6 +9,7 @@ import com.studydddwithjava.school.infrastructure.mysql.context.StudentTeamMembe
 import com.studydddwithjava.school.infrastructure.mysql.context.TeacherContext;
 import com.studydddwithjava.school.infrastructure.mysql.entity.StudentDataModel;
 import com.studydddwithjava.school.infrastructure.mysql.entity.StudentTeamMembershipDataModel;
+import jakarta.persistence.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -44,16 +45,18 @@ public class StudentRepository implements IStudentRepository {
         List<Student> res = new ArrayList<>();
 
         for (StudentTeamMembershipDataModel studentTeamMembershipDataModel : list) {
+            /* 中間テーブル`student_team_membership`の`student_id`から`students`を検索 */
             Optional<StudentDataModel> optionalStudentDataModel =
                     studentContext.findById(studentTeamMembershipDataModel.studentId);
 
+            /* 生徒モデルが存在した場合 */
             if (optionalStudentDataModel.isPresent()) {
                 StudentDataModel studentDataModel = optionalStudentDataModel.get();
 
                 res.add(new Student(
                         studentDataModel.id,
                         new UserName(studentDataModel.firstname, studentDataModel.lastname),
-                        studentDataModel.studentNumber,
+                        studentTeamMembershipDataModel.studentNumber,
                         team,
                         null
                 ));
@@ -66,28 +69,14 @@ public class StudentRepository implements IStudentRepository {
     }
 
     @Override
-    public List<Student> findByStudentNumber(int studentNumber) {
-        List<StudentDataModel> list = studentContext.findByStudentNumber(studentNumber);
-
-        List<Student> res = new ArrayList<>();
-
-        for (StudentDataModel model : list) {
-            res.add(new Student(
-                    model.id,
-                    new UserName(model.firstname, model.lastname),
-                    studentNumber,
-                    null,
-                    null
-            ));
-        }
-
-        return res;
+    public boolean existsSameStudentNumberInTeam(Student student, Team team) {
+        return studentTeamMembershipContext.existsByStudentNumberAndTeamId(student.getStudentNumber(), team.getId());
     }
 
     @Override
-    public int fetchMaxStudentNumber() {
-        Optional<StudentDataModel> opt = studentContext.findMaxStudentNumber();
+    public int fetchMaxStudentNumber(Team team) {
+        Optional<Tuple> opt = studentTeamMembershipContext.findMaxStudentNumber(team.getId());
 
-        return opt.map(studentDataModel -> studentDataModel.studentNumber).orElse(0);
+        return opt.map(res -> res.get("max", Integer.class)).orElse(0);
     }
 }

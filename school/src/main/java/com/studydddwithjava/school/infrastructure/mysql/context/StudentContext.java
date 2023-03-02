@@ -10,8 +10,4 @@ import java.util.Optional;
 
 @Repository
 public interface StudentContext extends JpaRepository<StudentDataModel, String> {
-    @Query("select s from StudentDataModel s where s.studentNumber = ?1")
-    List<StudentDataModel> findByStudentNumber(int studentNumber);
-    @Query("select s from StudentDataModel s order by s.studentNumber desc limit 1")
-    Optional<StudentDataModel> findMaxStudentNumber();
 }

@@ -8,7 +8,7 @@ public interface IStudentRepository {
     void save(Student student);
 
     List<Student> findByTeamId(Team team);
-    List<Student> findByStudentNumber(int studentNumber);
+    boolean existsSameStudentNumberInTeam(Student student, Team team);
 
-    int fetchMaxStudentNumber();
+    int fetchMaxStudentNumber(Team team);
 }
