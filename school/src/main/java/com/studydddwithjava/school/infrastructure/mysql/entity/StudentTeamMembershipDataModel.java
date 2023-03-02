@@ -16,10 +16,14 @@ public class StudentTeamMembershipDataModel {
     @Column(nullable = false, name = "team_id")
     public String teamId;
 
+    @Column(nullable = false, name = "student_number")
+    public int studentNumber;
+
     public StudentTeamMembershipDataModel() {}
 
     public StudentTeamMembershipDataModel(Student student) {
         this.studentId = student.getId();
         this.teamId = student.getTeam().getId();
+        this.studentNumber = student.getStudentNumber();
     }
 }

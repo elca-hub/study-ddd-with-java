@@ -23,9 +23,6 @@ public class StudentDataModel {
     @Column(length = 100, nullable = false)
     public String username;
 
-    @Column(nullable = false, name = "student_number")
-    public int studentNumber;
-
     @Column(nullable = false, name = "teacher_id")
     public String teacherId;
 
@@ -33,7 +30,6 @@ public class StudentDataModel {
 
     public StudentDataModel(Student student) {
         this.id = student.getId();
-        this.studentNumber = student.getStudentNumber();
         this.firstname = student.getName().getFirstName();
         this.lastname = student.getName().getLastName();
         this.username = student.getName().getFullName();
