@@ -15,9 +15,7 @@ CREATE TABLE IF NOT EXISTS students (
 	firstname varchar(25) NOT NULL,
 	lastname varchar(25) NOT NULL,
 	username varchar(100) NOT NULL,
-	student_number int NOT NULL,
-	PRIMARY KEY (id),
-	UNIQUE KEY (student_number)
+	PRIMARY KEY (id)
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4;
@@ -46,6 +44,7 @@ CREATE TABLE IF NOT EXISTS student_team_membership (
 	id int auto_increment NOT NULL,
 	student_id varchar(255) NOT NULL,
 	team_id varchar(255) NOT NULL,
+	student_number int NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (student_id) REFERENCES school_management.students(id),
 	FOREIGN KEY (team_id) REFERENCES school_management.teams(id)
