@@ -2,6 +2,9 @@ package com.studydddwithjava.school.controllers;
 
 import com.studydddwithjava.school.application.shared.ILogger;
 import com.studydddwithjava.school.application.shared.PageInfo;
+import com.studydddwithjava.school.application.student.StudentApplicationService;
+import com.studydddwithjava.school.application.student.StudentData;
+import com.studydddwithjava.school.application.student.param.FetchTeamMemberParam;
 import com.studydddwithjava.school.application.team.TeamApplicationService;
 import com.studydddwithjava.school.application.team.TeamData;
 import com.studydddwithjava.school.application.team.param.TeamRegisterParam;
@@ -15,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -22,6 +26,9 @@ import java.util.Optional;
 public class TeamController {
     @Autowired
     private TeamApplicationService teamApplicationService;
+
+    @Autowired
+    private StudentApplicationService studentApplicationService;
 
     @Autowired
     @Qualifier("slf4j")
@@ -33,7 +40,12 @@ public class TeamController {
 
         model.addAttribute("isEmpty", team.isEmpty());
         if (team.isPresent()) {
+            var param = new FetchTeamMemberParam();
+            param.setTeamId(teamId);
+            List<StudentData> students = studentApplicationService.fetchTeamMember(param);
+
             model.addAttribute("team", team.get());
+            model.addAttribute("students", students);
             model.addAttribute("pageInfo", new PageInfo(team.get().getName()));
         } else {
             model.addAttribute("pageInfo", new PageInfo("見つかりませんでした"));
