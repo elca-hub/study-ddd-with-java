@@ -16,7 +16,7 @@
                 <tr>
                     <th scope="col">生徒番号</th>
                     <th scope="col">氏名</th>
-                    <th scope="col">削除</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -24,7 +24,7 @@
                     <th scope="row" th:text="${student.studentNumber}"></th>
                     <td th:text="${student.username}"></td>
                     <td>
-                        <a href="#" class="btn btn-danger">削除</a>
+                        <a href="#" class="btn btn-danger">削除<i class="ms-1 bi-trash"></i></a>
                     </td>
                 </tr>
             </tbody>
