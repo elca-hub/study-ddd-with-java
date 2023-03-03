@@ -1,6 +1,52 @@
+function createStudentElements(students) {
+    const fistElements = `
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">生徒番号</th>
+            <th scope="col">姓</th>
+            <th scope="col">名</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+    const endElements = `
+        </tbody>
+    </table>
+    `;
+
+    let columnElements = "";
+
+    for (const student of students) {
+        columnElements += `
+        <tr>
+            <th scope="row">${student.studentNumber}</th>
+            <td>${student.firstname}</td>
+            <td>${student.lastname}</td>
+        </tr>
+        `;
+    }
+
+    return fistElements + columnElements + endElements;
+}
+
+function createErrorElement() {
+    return `
+    <p>申し訳ありません、エラーが発生しました。もう一度お試しください。</p>
+    `
+}
+
+function createEmptyElement() {
+    return `
+    <p>まだ生徒を登録していません。</p>
+    `
+}
+
 async function fetchTeamMember(teamId) {
     const token = document.querySelector('meta[name="_csrf"]').content; 
     const tokenType = document.querySelector('meta[name="_csrf_header"]').content;
+
+    const targetElement = document.getElementById(`content-${teamId}`);
 
     const headers = {
         "Content-Type": "application/json"
@@ -15,9 +61,10 @@ async function fetchTeamMember(teamId) {
             body: JSON.stringify({teamId}),
         });
         const data = await res.json();
-        console.log(data);
+        
+        targetElement.innerHTML = data.length ? createStudentElements(data) : createEmptyElement();
     } catch (e) {
-        console.log("error");
+        targetElement.innerHTML = createErrorElement();
     }
 }
 
