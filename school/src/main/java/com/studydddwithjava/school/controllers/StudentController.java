@@ -37,7 +37,6 @@ public class StudentController {
     ) {
         List<TeamData> teams = teamApplicationService.findByTeacher(teacherDetails.getUsername());
 
-        /* TODO: 出席番号をデフォルトでセットするための値の取得 */
         model.addAttribute("teams", teams);
 
         return "/auth/student/new";

@@ -70,7 +70,6 @@ public class StudentApplicationService {
 
         studentRepository.save(student);
     }
-
     public List<StudentData> fetchTeamMember(
             FetchTeamMemberParam fetchTeamMemberParam
     ) {
