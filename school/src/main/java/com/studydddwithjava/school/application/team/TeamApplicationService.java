@@ -18,7 +18,7 @@ import java.util.Optional;
 public class TeamApplicationService {
     @Autowired
     @Qualifier("mysql-team")
-    private ITeamRepository groupRepository;
+    private ITeamRepository teamRepository;
 
     @Autowired
     @Qualifier("mysql-teacher")
@@ -29,7 +29,13 @@ public class TeamApplicationService {
         Team team = new Team(new TeamName(groupName));
         Optional<Teacher> opt = teacherRepository.findByUserName(new UserName(teacherName));
 
-        opt.ifPresent(teacher -> groupRepository.save(teacher, team));
+        opt.ifPresent(teacher -> teamRepository.save(teacher, team));
+    }
+
+    public Optional<TeamData> findById(String teamId) {
+        Optional<Team> optionalTeam = teamRepository.findById(teamId);
+
+        return optionalTeam.map(TeamData::new);
     }
 
     public List<TeamData> findByTeacher(String teacherName) {
@@ -38,7 +44,7 @@ public class TeamApplicationService {
         if (opt.isEmpty()) {
             return List.of();
         } else {
-            List<Team> teams = groupRepository.findByTeacher(opt.get());
+            List<Team> teams = teamRepository.findByTeacher(opt.get());
 
             List<TeamData> data = new java.util.ArrayList<>(List.of());
 

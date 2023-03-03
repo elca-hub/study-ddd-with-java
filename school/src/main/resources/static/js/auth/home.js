@@ -46,7 +46,7 @@ async function fetchTeamMember(teamId) {
     const token = document.querySelector('meta[name="_csrf"]').content; 
     const tokenType = document.querySelector('meta[name="_csrf_header"]').content;
 
-    const targetElement = document.getElementById(`content-${teamId}`);
+    const targetElement = document.getElementById(`student-list-${teamId}`);
 
     const headers = {
         "Content-Type": "application/json"

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="~{fragment/head.html}"></th:block>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div class="main-title mb-4">
+    <h1>School Management</h1>
+    <h2 th:text="${isEmpty ? 'チームが見つかりませんでした' : team.name}"></h2>
+</div>
+<div class="content mt-4">
+    <th:block th:if="${!isEmpty}">
+        <h2 th:text="${team.name}"></h2>
+    </th:block>
+    <th:block th:if="${isEmpty}">
+        <p>チームが見つかりませんでした。再度お試しください。</p>
+    </th:block>
+</div>
+</body>
+</html>
