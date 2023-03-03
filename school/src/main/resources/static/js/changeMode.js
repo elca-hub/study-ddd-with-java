@@ -3,7 +3,7 @@ function changeDarkMode() {
 
     const htmlEle = document.getElementsByTagName('html');
     
-    htmlEle[0].setAttribute('data-bs-theme', (18 >= hour || hour <= 5) ? 'dark' : 'light');
+    htmlEle[0].setAttribute('data-bs-theme', 18 <= hour || hour <= 5 ? 'dark' : 'light');
 }
 
 changeDarkMode();
