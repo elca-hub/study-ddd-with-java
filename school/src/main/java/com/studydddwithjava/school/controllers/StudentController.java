@@ -1,5 +1,6 @@
 package com.studydddwithjava.school.controllers;
 
+import com.studydddwithjava.school.application.shared.PageInfo;
 import com.studydddwithjava.school.application.student.StudentApplicationService;
 import com.studydddwithjava.school.application.student.param.StudentRegisterParam;
 import com.studydddwithjava.school.application.team.TeamApplicationService;
@@ -38,6 +39,8 @@ public class StudentController {
         List<TeamData> teams = teamApplicationService.findByTeacher(teacherDetails.getUsername());
 
         model.addAttribute("teams", teams);
+
+        model.addAttribute(new PageInfo("生徒の新規追加"));
 
         return "/auth/student/new";
     }

@@ -1,6 +1,7 @@
 package com.studydddwithjava.school.controllers;
 
 import com.studydddwithjava.school.application.shared.ILogger;
+import com.studydddwithjava.school.application.shared.PageInfo;
 import com.studydddwithjava.school.application.teacher.TeacherApplicationService;
 import com.studydddwithjava.school.application.teacher.param.TeacherRegisterParam;
 import jakarta.servlet.ServletException;
@@ -26,16 +27,19 @@ public class SchoolController {
 
     @GetMapping("/")
     public String index(Model model) {
+        model.addAttribute(new PageInfo("ホーム"));
         return "index";
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute(new PageInfo("ログイン"));
         return "login";
     }
 
     @GetMapping("/signup")
-    public String signup() {
+    public String signup(Model model) {
+        model.addAttribute(new PageInfo("新規登録"));
         return "signup";
     }
 

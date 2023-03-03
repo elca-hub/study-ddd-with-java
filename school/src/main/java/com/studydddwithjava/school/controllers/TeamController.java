@@ -1,5 +1,6 @@
 package com.studydddwithjava.school.controllers;
 
+import com.studydddwithjava.school.application.shared.PageInfo;
 import com.studydddwithjava.school.application.team.TeamApplicationService;
 import com.studydddwithjava.school.application.shared.ILogger;
 import com.studydddwithjava.school.application.team.param.TeamRegisterParam;
@@ -27,6 +28,7 @@ public class TeamController {
 
     @GetMapping("/new")
     public String newTeam(Model model) {
+        model.addAttribute(new PageInfo("チームの新規追加"));
         return "/auth/team/new";
     }
 

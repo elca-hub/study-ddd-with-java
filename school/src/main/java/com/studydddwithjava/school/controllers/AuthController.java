@@ -1,6 +1,7 @@
 package com.studydddwithjava.school.controllers;
 
 import com.studydddwithjava.school.application.shared.ILogger;
+import com.studydddwithjava.school.application.shared.PageInfo;
 import com.studydddwithjava.school.application.teacher.TeacherApplicationService;
 import com.studydddwithjava.school.application.teacher.TeacherData;
 import com.studydddwithjava.school.application.team.TeamApplicationService;
@@ -45,6 +46,7 @@ public class AuthController {
 
         model.addAttribute("teacher", teacher);
         model.addAttribute("teams", teams);
+        model.addAttribute(new PageInfo("管理画面"));
 
         logger.info(String.format("Succeed login. Teacher name: %s", teacher.getUserName()));
 
