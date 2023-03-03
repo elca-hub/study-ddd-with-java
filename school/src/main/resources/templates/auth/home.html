@@ -23,14 +23,15 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation" th:each="team, teamStat : ${teams}">
         <button
-                th:class="'nav-link ' + ${teamStat.first ? 'active' : ''}"
-                th:id="${team.getId()} + '-tab'"
+                th:class="|nav-link ${teamStat.first ? 'active first-show' : ''}|"
+                th:id="|tab-${team.getId()}|"
                 data-bs-toggle="tab"
-                th:data-bs-target="'#id-' + ${team.getId()}"
+                th:data-bs-target="|#content-${team.getId()}|"
                 type="button"
                 role="tab"
-                th:aria-controls="'controls-id-' + ${team.getId()}"
+                th:aria-controls="|content-${team.getId()}|"
                 th:aria-selected="${teamStat.first}"
+                th:onclick="|fetchTeamMember('__${team.getId()}__')|"
         >
             <th:block th:text="${team.getName()}" />
         </button>
@@ -41,9 +42,9 @@
     <div
             th:each="team, teamStat : ${teams}"
             th:class="'tab-pane fade ' +${teamStat.first ? 'show active' : ''}"
-            th:id="'id-' + ${team.getId()}"
+            th:id="|content-${team.getId()}|"
             role="tabpanel"
-            th:aria-labelledby="${team.getId()} + '-tab'"
+            th:aria-labelledby="|tab-${team.getId()}|"
     >
         ここには<th:block th:text="${team.getName()}" />に登録されている生徒の一覧が表示される予定です
     </div>
@@ -52,5 +53,7 @@
 <form th:action="@{/logout}" method="post">
     <button type="submit" class="btn btn-primary">ログアウト</button>
 </form>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script src="/js/auth/home.js"></script>
 </body>
 </html>
