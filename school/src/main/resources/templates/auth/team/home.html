@@ -24,7 +24,11 @@
                     <th scope="row" th:text="${student.studentNumber}"></th>
                     <td th:text="${student.username}"></td>
                     <td>
-                        <a href="#" class="btn btn-danger">削除<i class="ms-1 bi-trash"></i></a>
+                        <form method="post" th:action="@{/auth/team/__${team.id}__/__${student.id}__/remove}">
+                            <button href="#" type="submit" class="btn btn-danger">
+                                削除<i class="ms-1 bi-trash"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
             </tbody>

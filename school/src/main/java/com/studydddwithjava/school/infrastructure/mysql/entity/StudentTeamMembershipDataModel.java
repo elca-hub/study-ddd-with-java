@@ -6,7 +6,6 @@ import com.studydddwithjava.school.domain.model.student.Student;import jakarta.p
 @Table(name = "student_team_membership")
 public class StudentTeamMembershipDataModel {
     @Id
-    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id;
 

@@ -1,9 +1,11 @@
 package com.studydddwithjava.school.infrastructure.mysql.repository;
 
+import com.studydddwithjava.school.domain.model.student.Student;
 import com.studydddwithjava.school.domain.model.teacher.Teacher;
 import com.studydddwithjava.school.domain.model.team.ITeamRepository;
 import com.studydddwithjava.school.domain.model.team.Team;
 import com.studydddwithjava.school.domain.model.team.TeamName;
+import com.studydddwithjava.school.infrastructure.mysql.context.StudentTeamMembershipContext;
 import com.studydddwithjava.school.infrastructure.mysql.context.TeacherTeamMembershipContext;
 import com.studydddwithjava.school.infrastructure.mysql.context.TeamContext;
 import com.studydddwithjava.school.infrastructure.mysql.entity.TeacherTeamMembershipDataModel;
@@ -22,6 +24,9 @@ public class TeamRepository implements ITeamRepository {
 
     @Autowired
     private TeacherTeamMembershipContext teacherTeamMembershipContext;
+
+    @Autowired
+    private StudentTeamMembershipContext studentTeamMembershipContext;
 
     @Override
     @Transactional
@@ -59,5 +64,13 @@ public class TeamRepository implements ITeamRepository {
     public Optional<Team> findById(String id) {
         Optional<TeamDataModel> opt = teamContext.findById(id);
         return opt.map(model -> new Team(model.id, new TeamName(model.name)));
+    }
+
+    @Override
+    public void removeStudent(Student student) {
+        studentTeamMembershipContext.deleteByStudentIdAndTeamId(
+                student.getId(),
+                student.getTeam().getId()
+        );
     }
 }

@@ -48,7 +48,7 @@ public class Student {
     }
 
     public void changeStudentNumber(int studentNumber) {
-        if (studentNumber < 0 || studentNumber > STUDENT_MAX_NUMBER) {
+        if (studentNumber < -1 || studentNumber > STUDENT_MAX_NUMBER) {
             throw new IllegalArgumentException("The student number has exceeded the limit.");
         }
         this.studentNumber = studentNumber;

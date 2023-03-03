@@ -3,12 +3,14 @@ package com.studydddwithjava.school.infrastructure.mysql.repository;
 import com.studydddwithjava.school.domain.model.student.IStudentRepository;
 import com.studydddwithjava.school.domain.model.student.Student;
 import com.studydddwithjava.school.domain.model.team.Team;
+import com.studydddwithjava.school.domain.model.team.TeamName;
 import com.studydddwithjava.school.domain.model.user.UserName;
 import com.studydddwithjava.school.infrastructure.mysql.context.StudentContext;
 import com.studydddwithjava.school.infrastructure.mysql.context.StudentTeamMembershipContext;
 import com.studydddwithjava.school.infrastructure.mysql.context.TeacherContext;
 import com.studydddwithjava.school.infrastructure.mysql.entity.StudentDataModel;
 import com.studydddwithjava.school.infrastructure.mysql.entity.StudentTeamMembershipDataModel;
+import com.studydddwithjava.school.infrastructure.mysql.entity.TeamDataModel;
 import jakarta.persistence.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -80,5 +82,56 @@ public class StudentRepository implements IStudentRepository {
         Optional<Tuple> opt = studentTeamMembershipContext.findMaxStudentNumber(team.getId());
 
         return opt.map(res -> res.get("max", Integer.class)).orElse(0);
+    }
+
+    @Override
+    public Optional<Student> findById(String studentId) {
+        Optional<StudentDataModel> opt = studentContext.findById(studentId);
+
+        return opt.map(res -> new Student(
+                res.id,
+                new UserName(res.firstname, res.lastname),
+                -1,
+                null,
+                null
+        ));
+    }
+
+    @Override
+    public Optional<Student> findById(String studentId, String teamId) {
+        var optStudentTeamMembership = studentTeamMembershipContext.findByStudentIdAndTeamId(studentId, teamId);
+
+        return optStudentTeamMembership.map(studentTeamMembership -> {
+            Optional<Student> optStudent = this.findById(studentId);
+            if (optStudent.isEmpty()) throw new IllegalArgumentException();
+
+            var student = optStudent.get();
+            student.changeStudentNumber(studentTeamMembership.studentNumber);
+
+            return student;
+        });
+    }
+
+    @Override
+    public List<Team> getJoinTeams(String studentId) {
+        List<TeamDataModel> teamDataModels = studentTeamMembershipContext.findTeamByStudentId(studentId);
+
+        List<Team> teams = new ArrayList<>();
+
+        for (var column : teamDataModels) {
+            teams.add(new Team(
+                    column.id,
+                    new TeamName(column.name)
+            ));
+        }
+
+        return teams;
+    }
+
+    @Override
+    @Transactional
+    public void delete(String studentId) {
+        studentTeamMembershipContext.deleteByStudentId(studentId);
+        studentContext.deleteById(studentId);
     }
 }

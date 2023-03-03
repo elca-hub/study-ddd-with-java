@@ -76,4 +76,15 @@ public class TeamController {
 
         return "redirect:/auth/";
     }
+
+    @PostMapping("/{teamId}/{studentId}/remove")
+    public String remove(
+            @PathVariable String teamId,
+            @PathVariable String studentId,
+            @AuthenticationPrincipal LoginTeacherDetails teacherDetails
+    ) {
+        teamApplicationService.removeStudent(teamId, studentId, teacherDetails.getUsername());
+
+        return "redirect:/auth/team/" + teamId;
+    }
 }

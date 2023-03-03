@@ -1,10 +1,12 @@
 package com.studydddwithjava.school.infrastructure.mysql.entity;
 
 import com.studydddwithjava.school.domain.model.team.Team;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="teams")
@@ -15,6 +17,11 @@ public class TeamDataModel {
 
     @Column
     public String name;
+
+    @Setter(AccessLevel.NONE)
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private List<StudentTeamMembershipDataModel> studentTeamMembershipDataModelList = new ArrayList<>();
 
     public TeamDataModel() {}
 

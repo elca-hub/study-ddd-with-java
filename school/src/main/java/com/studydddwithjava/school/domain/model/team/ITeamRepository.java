@@ -1,5 +1,6 @@
 package com.studydddwithjava.school.domain.model.team;
 
+import com.studydddwithjava.school.domain.model.student.Student;
 import com.studydddwithjava.school.domain.model.teacher.Teacher;
 
 import java.util.List;
@@ -10,4 +11,6 @@ public interface ITeamRepository {
 
     List<Team> findByTeacher(Teacher teacher);
     Optional<Team> findById(String id);
+
+    void removeStudent(Student student);
 }
