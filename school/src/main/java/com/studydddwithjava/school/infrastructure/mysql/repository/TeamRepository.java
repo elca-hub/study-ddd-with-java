@@ -1,17 +1,17 @@
 package com.studydddwithjava.school.infrastructure.mysql.repository;
 
 import com.studydddwithjava.school.domain.model.teacher.Teacher;
+import com.studydddwithjava.school.domain.model.team.ITeamRepository;
 import com.studydddwithjava.school.domain.model.team.Team;
 import com.studydddwithjava.school.domain.model.team.TeamName;
-import com.studydddwithjava.school.domain.model.team.ITeamRepository;
-import com.studydddwithjava.school.infrastructure.mysql.context.TeamContext;
 import com.studydddwithjava.school.infrastructure.mysql.context.TeacherTeamMembershipContext;
+import com.studydddwithjava.school.infrastructure.mysql.context.TeamContext;
 import com.studydddwithjava.school.infrastructure.mysql.entity.TeacherTeamMembershipDataModel;
 import com.studydddwithjava.school.infrastructure.mysql.entity.TeamDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +24,7 @@ public class TeamRepository implements ITeamRepository {
     private TeacherTeamMembershipContext teacherTeamMembershipContext;
 
     @Override
+    @Transactional
     public void save(Teacher teacher, Team team) {
         TeamDataModel teamDataModel = new TeamDataModel(team);
         TeacherTeamMembershipDataModel teacherTeamMembership = new TeacherTeamMembershipDataModel(teacher, team);

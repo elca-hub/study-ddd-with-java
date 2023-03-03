@@ -67,7 +67,6 @@ public class StudentApplicationService {
                     "That student number is already in use and cannot be used.\n Student number: %d",
                     student.getStudentNumber()));
         }
-
         studentRepository.save(student);
     }
     public List<StudentData> fetchTeamMember(

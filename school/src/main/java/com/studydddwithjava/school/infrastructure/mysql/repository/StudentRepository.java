@@ -12,6 +12,7 @@ import com.studydddwithjava.school.infrastructure.mysql.entity.StudentTeamMember
 import jakarta.persistence.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class StudentRepository implements IStudentRepository {
     @Autowired
     private TeacherContext teacherContext;
     @Override
+    @Transactional
     public void save(Student student) {
         StudentDataModel studentDataModel = new StudentDataModel(student);
 
