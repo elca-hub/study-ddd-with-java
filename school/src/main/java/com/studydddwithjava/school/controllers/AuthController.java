@@ -46,7 +46,7 @@ public class AuthController {
 
         model.addAttribute("teacher", teacher);
         model.addAttribute("teams", teams);
-        model.addAttribute(new PageInfo("管理画面"));
+        model.addAttribute("pageInfo", new PageInfo("管理画面"));
 
         logger.info(String.format("Succeed login. Teacher name: %s", teacher.getUserName()));
 

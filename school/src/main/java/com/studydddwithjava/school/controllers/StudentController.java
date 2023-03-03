@@ -40,7 +40,7 @@ public class StudentController {
 
         model.addAttribute("teams", teams);
 
-        model.addAttribute(new PageInfo("生徒の新規追加"));
+        model.addAttribute("pageInfo", new PageInfo("生徒の新規追加"));
 
         return "/auth/student/new";
     }

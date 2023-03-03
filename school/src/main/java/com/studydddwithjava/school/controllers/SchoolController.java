@@ -27,19 +27,19 @@ public class SchoolController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute(new PageInfo("ホーム"));
+        model.addAttribute("pageInfo", new PageInfo("ホーム"));
         return "index";
     }
 
     @GetMapping("/login")
     public String login(Model model) {
-        model.addAttribute(new PageInfo("ログイン"));
+        model.addAttribute("pageInfo", new PageInfo("ログイン"));
         return "login";
     }
 
     @GetMapping("/signup")
     public String signup(Model model) {
-        model.addAttribute(new PageInfo("新規登録"));
+        model.addAttribute("pageInfo", new PageInfo("新規登録"));
         return "signup";
     }
 
