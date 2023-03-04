@@ -55,11 +55,7 @@ public class TeamApplicationService {
         } else {
             List<Team> teams = teamRepository.findByTeacher(opt.get());
 
-            List<TeamData> data = new java.util.ArrayList<>(List.of());
-
-            for (Team team : teams) data.add(new TeamData(team));
-
-            return data;
+            return teams.stream().map(TeamData::new).toList();
         }
     }
 
