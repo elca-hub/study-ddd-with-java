@@ -29,11 +29,13 @@ public class TeamApplicationService {
     @Qualifier("mysql-student")
     private IStudentRepository studentRepository;
 
-    public void register(String groupName, String teacherName) throws IllegalArgumentException {
+    public String register(String groupName, String teacherName) throws IllegalArgumentException {
         Team team = new Team(new TeamName(groupName));
         Optional<Teacher> opt = teacherRepository.findByUserName(new UserName(teacherName));
 
         opt.ifPresent(teacher -> teamRepository.save(teacher, team));
+
+        return team.getId();
     }
 
     public Optional<TeamData> findById(String teamId) {
