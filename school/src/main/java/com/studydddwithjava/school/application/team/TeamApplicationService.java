@@ -1,5 +1,7 @@
 package com.studydddwithjava.school.application.team;
 
+import com.studydddwithjava.school.application.student.StudentData;
+import com.studydddwithjava.school.application.student.param.FetchTeamMemberParam;
 import com.studydddwithjava.school.domain.model.student.IStudentRepository;
 import com.studydddwithjava.school.domain.model.student.Student;
 import com.studydddwithjava.school.domain.model.teacher.ITeacherRepository;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -119,5 +122,26 @@ public class TeamApplicationService {
             student.changeStudentNumber(studentNumber++);
             studentRepository.joinTeam(student);
         }
+    }
+
+
+    public List<StudentData> fetchTeamMember(
+            FetchTeamMemberParam fetchTeamMemberParam
+    ) {
+        Optional<Team> optionalTeam = teamRepository.findById(fetchTeamMemberParam.getTeamId());
+
+        if (optionalTeam.isEmpty()) {
+            throw new IllegalArgumentException("The id could not be retrieved correctly.");
+        }
+
+        Team team = optionalTeam.get();
+
+        List<Student> students = studentRepository.findByTeamId(team);
+
+        List<StudentData> res = new ArrayList<>();
+
+        for (Student student : students) res.add(new StudentData(student));
+
+        return res;
     }
 }

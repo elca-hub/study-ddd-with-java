@@ -1,19 +1,19 @@
 package com.studydddwithjava.school.controllers;
 
-import com.studydddwithjava.school.application.student.StudentApplicationService;
-import com.studydddwithjava.school.application.student.StudentData;
-import com.studydddwithjava.school.application.student.param.StudentRegisterParam;
-import com.studydddwithjava.school.application.team.TeamApplicationService;
 import com.studydddwithjava.school.application.shared.ILogger;
+import com.studydddwithjava.school.application.student.StudentData;
 import com.studydddwithjava.school.application.student.param.FetchTeamMemberParam;
+import com.studydddwithjava.school.application.team.TeamApplicationService;
 import com.studydddwithjava.school.infrastructure.security.LoginTeacherDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class ApiController {
     @Autowired
-    private StudentApplicationService studentApplicationService;
+    private TeamApplicationService teamApplicationService;
 
     @Autowired
     @Qualifier("slf4j")
@@ -36,6 +36,6 @@ public class ApiController {
         if (result.hasErrors()) throw new IllegalArgumentException();
         logger.info("called api, fetch team member");
 
-        return studentApplicationService.fetchTeamMember(fetchTeamMemberParam);
+        return teamApplicationService.fetchTeamMember(fetchTeamMemberParam);
     }
 }

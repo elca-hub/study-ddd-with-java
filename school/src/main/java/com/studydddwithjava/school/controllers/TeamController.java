@@ -42,7 +42,7 @@ public class TeamController {
         if (team.isPresent()) {
             var param = new FetchTeamMemberParam();
             param.setTeamId(teamId);
-            List<StudentData> students = studentApplicationService.fetchTeamMember(param);
+            List<StudentData> students = teamApplicationService.fetchTeamMember(param);
 
             model.addAttribute("team", team.get());
             model.addAttribute("students", students);
