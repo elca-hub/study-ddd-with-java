@@ -2,11 +2,9 @@ package com.studydddwithjava.school.application.teacher;
 
 import com.studydddwithjava.school.domain.model.teacher.ITeacherRepository;
 import com.studydddwithjava.school.domain.model.teacher.Teacher;
-import com.studydddwithjava.school.domain.model.teacher.TeacherHashPw;
 import com.studydddwithjava.school.domain.model.teacher.TeacherPw;
-import com.studydddwithjava.school.domain.service.TeacherService;
 import com.studydddwithjava.school.domain.model.user.UserName;
-import org.apache.catalina.User;
+import com.studydddwithjava.school.domain.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -58,13 +56,7 @@ public class TeacherApplicationService {
 
         Teacher teacher = optTeacher.get();
 
-        return Optional.of(
-                new TeacherData(
-                        teacher.getName().getFirstName(),
-                        teacher.getName().getLastName(),
-                        teacher.getName().getFullName()
-                )
-        );
+        return Optional.of(new TeacherData(teacher));
     }
 
     public String fetchFullName(String firstname, String lastname) {
