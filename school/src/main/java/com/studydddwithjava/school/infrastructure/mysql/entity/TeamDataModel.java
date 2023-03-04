@@ -19,8 +19,7 @@ public class TeamDataModel {
     public String name;
 
     @Setter(AccessLevel.NONE)
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "teamId")
     private List<StudentTeamMembershipDataModel> studentTeamMembershipDataModelList = new ArrayList<>();
 
     public TeamDataModel() {}

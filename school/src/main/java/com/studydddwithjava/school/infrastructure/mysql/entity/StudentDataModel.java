@@ -29,8 +29,7 @@ public class StudentDataModel {
     public String teacherId;
 
     @Setter(AccessLevel.NONE)
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "studentId")
     private List<StudentTeamMembershipDataModel> studentTeamMembershipDataModelList = new ArrayList<>();
 
     public StudentDataModel() {}

@@ -18,6 +18,12 @@ public class StudentTeamMembershipDataModel {
     @Column(nullable = false, name = "student_number")
     public int studentNumber;
 
+    @ManyToOne
+    private TeamDataModel teamDataModel;
+
+    @ManyToOne
+    private StudentDataModel studentDataModel;
+
     public StudentTeamMembershipDataModel() {}
 
     public StudentTeamMembershipDataModel(Student student) {
