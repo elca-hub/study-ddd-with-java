@@ -93,7 +93,31 @@ public class TeamApplicationService {
         Team team = optionalTeam.get();
         Teacher teacher = optionalTeacher.get();
 
-        /* teacherモデルを使用して、teacherにteamの削除権限があるかをチェック */
+        /* TODO: teacherモデルを使用して、teacherにteamの削除権限があるかをチェック */
+        List<Student> students = studentRepository.findByTeamId(team);
+
         teamRepository.delete(team);
+
+        for (var student : students) {
+            if (studentRepository.getJoinTeams(student.getId()).size() == 0) {
+                studentRepository.delete(student.getId());
+            }
+        }
+    }
+
+    public void joinStudents(String teamId, List<String> studentIds) {
+        List<Student> students = studentRepository.fetchStudents(studentIds);
+        Optional<Team> optionalTeam = teamRepository.findById(teamId);
+        if (optionalTeam.isEmpty()) throw new IllegalArgumentException();
+
+        Team team = optionalTeam.get();
+
+        int studentNumber = 1;
+
+        for (var student : students) {
+            student.setTeam(team);
+            student.changeStudentNumber(studentNumber++);
+            studentRepository.joinTeam(student);
+        }
     }
 }

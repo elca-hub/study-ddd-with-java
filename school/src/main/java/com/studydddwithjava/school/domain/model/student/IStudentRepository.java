@@ -22,4 +22,8 @@ public interface IStudentRepository {
     void delete(String studentId);
 
     List<Student> findAll();
+
+    List<Student> fetchStudents(List<String> studentIds);
+
+    void joinTeam(Student student);
 }

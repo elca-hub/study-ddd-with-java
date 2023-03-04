@@ -71,7 +71,11 @@ public class TeamController {
     ) {
         if (result.hasErrors()) return "redirect:/auth/team/new?error";
         try {
-            teamApplicationService.register(teamRegisterParam.getGroupName(), teacherDetails.getUsername());
+            String teamId = teamApplicationService.register(teamRegisterParam.getGroupName(), teacherDetails.getUsername());
+
+            if (teamRegisterParam.getStudents() != null) {
+                teamApplicationService.joinStudents(teamId, teamRegisterParam.getStudents());
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return "redirect:/auth/team/new?error";

@@ -143,16 +143,37 @@ public class StudentRepository implements IStudentRepository {
     public List<Student> findAll() {
         List<StudentDataModel> studentDataModels = studentContext.findAll();
 
-        return studentDataModels
-                .stream()
-                .map(model -> new Student(
-                        model.id,
-                                new UserName(model.firstname, model.lastname),
-                                -1,
-                                null,
-                                null
-                        )
-                )
-                .toList();
+        return studentDataModels.stream().map(model -> new Student(
+                model.id,
+                new UserName(model.firstname, model.lastname),
+                -1,
+                null,
+                null
+        )).toList();
+    }
+
+    @Override
+    public List<Student> fetchStudents(List<String> studentIds) {
+        List<StudentDataModel> studentDataModels = studentContext.findByIdIn(studentIds);
+
+        return studentDataModels.stream().map(model -> new Student(
+                model.id,
+                new UserName(model.firstname, model.lastname),
+                -1,
+                null,
+                null
+        )).toList();
+    }
+
+    @Override
+    public void joinTeam(Student student) {
+        Optional<StudentTeamMembershipDataModel> optionalStudentTeamMembershipDataModel
+                = studentTeamMembershipContext.findByStudentIdAndTeamId(student.getId(), student.getTeam().getId());
+
+        if (optionalStudentTeamMembershipDataModel.isPresent()) return;
+
+        var insertStudentTeamMembershipModel = new StudentTeamMembershipDataModel(student);
+
+        studentTeamMembershipContext.save(insertStudentTeamMembershipModel);
     }
 }
