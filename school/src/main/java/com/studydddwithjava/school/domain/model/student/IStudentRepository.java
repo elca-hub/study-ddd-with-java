@@ -20,4 +20,6 @@ public interface IStudentRepository {
     List<Team> getJoinTeams(String studentId);
 
     void delete(String studentId);
+
+    List<Student> findAll();
 }

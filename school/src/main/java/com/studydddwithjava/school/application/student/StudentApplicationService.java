@@ -69,6 +69,13 @@ public class StudentApplicationService {
         }
         studentRepository.save(student);
     }
+
+    public List<StudentData> fetchStudents() {
+        List<Student> students = studentRepository.findAll();
+
+        return students.stream().map(StudentData::new).toList();
+    }
+
     public List<StudentData> fetchTeamMember(
             FetchTeamMemberParam fetchTeamMemberParam
     ) {

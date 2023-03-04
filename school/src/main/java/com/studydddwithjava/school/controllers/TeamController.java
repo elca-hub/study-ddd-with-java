@@ -56,6 +56,9 @@ public class TeamController {
 
     @GetMapping("/new")
     public String newTeam(Model model) {
+        List<StudentData> students = studentApplicationService.fetchStudents();
+
+        model.addAttribute("students", students);
         model.addAttribute("pageInfo", new PageInfo("チームの新規追加"));
         return "/auth/team/new";
     }
