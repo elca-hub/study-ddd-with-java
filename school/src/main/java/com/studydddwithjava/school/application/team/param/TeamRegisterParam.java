@@ -1,16 +1,14 @@
 package com.studydddwithjava.school.application.team.param;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
+import java.util.List;
+
+@Data
 public class TeamRegisterParam {
     @NotBlank
     private String groupName;
 
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
+    private List<String> students;
 }
