@@ -79,4 +79,19 @@ public class TeamApplicationService {
         /* チームに所属していない生徒を削除 */
         if (studentRepository.getJoinTeams(studentId).size() == 0) studentRepository.delete(studentId);
     }
+
+    public void delete(String teamId, String teacherName) {
+        Optional<Team> optionalTeam = teamRepository.findById(teamId);
+        Optional<Teacher> optionalTeacher = teacherRepository.findByUserName(new UserName(teacherName));
+
+        if (optionalTeam.isEmpty() || optionalTeacher.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        Team team = optionalTeam.get();
+        Teacher teacher = optionalTeacher.get();
+
+        /* teacherモデルを使用して、teacherにteamの削除権限があるかをチェック */
+        teamRepository.delete(team);
+    }
 }

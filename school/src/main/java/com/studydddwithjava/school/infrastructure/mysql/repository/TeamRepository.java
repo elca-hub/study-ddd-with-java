@@ -73,4 +73,13 @@ public class TeamRepository implements ITeamRepository {
                 student.getTeam().getId()
         );
     }
+
+    @Override
+    @Transactional
+    public void delete(Team team) {
+        studentTeamMembershipContext.deleteByTeamId(team.getId());
+        teacherTeamMembershipContext.deleteByTeamId(team.getId());
+
+        teamContext.deleteById(team.getId());
+    }
 }

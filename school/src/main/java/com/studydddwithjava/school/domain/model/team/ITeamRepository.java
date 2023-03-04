@@ -13,4 +13,5 @@ public interface ITeamRepository {
     Optional<Team> findById(String id);
 
     void removeStudent(Student student);
+    void delete(Team team);
 }

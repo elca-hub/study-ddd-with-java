@@ -83,8 +83,30 @@ public class TeamController {
             @PathVariable String studentId,
             @AuthenticationPrincipal LoginTeacherDetails teacherDetails
     ) {
-        teamApplicationService.removeStudent(teamId, studentId, teacherDetails.getUsername());
+        try {
+            teamApplicationService.removeStudent(teamId, studentId, teacherDetails.getUsername());
+        } catch(Exception e) {
+            e.printStackTrace();
+
+            return String.format("redirect:/auth/team/%s?error", teamId);
+        }
 
         return "redirect:/auth/team/" + teamId;
+    }
+
+    @PostMapping("/{teamId}/delete")
+    public String deleteTeam(
+            @PathVariable String teamId,
+            @AuthenticationPrincipal LoginTeacherDetails teacherDetails
+    ) {
+        try {
+            teamApplicationService.delete(teamId, teacherDetails.getUsername());
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return String.format("redirect:/auth/team/%s?error", teamId);
+        }
+
+        return "redirect:/auth/";
     }
 }

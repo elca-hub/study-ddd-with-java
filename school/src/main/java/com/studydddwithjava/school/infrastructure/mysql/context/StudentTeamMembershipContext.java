@@ -30,4 +30,7 @@ public interface StudentTeamMembershipContext extends JpaRepository<StudentTeamM
 
     @Transactional
     void deleteByStudentIdAndTeamId(String studentId, String teamId);
+
+    @Transactional
+    void deleteByTeamId(String teamId);
 }

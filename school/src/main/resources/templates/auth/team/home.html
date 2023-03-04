@@ -11,6 +11,13 @@
 </div>
 <div class="content mt-4">
     <th:block th:if="${!isEmpty}">
+        <div class="team-control mb-3">
+            <form method="post" th:action="@{/auth/team/__${team.id}__/delete}">
+                <button type="submit" class="btn btn-danger">
+                    チームを削除する<i class="ms-1 bi-trash"></i>
+                </button>
+            </form>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -25,7 +32,7 @@
                     <td th:text="${student.username}"></td>
                     <td>
                         <form method="post" th:action="@{/auth/team/__${team.id}__/__${student.id}__/remove}">
-                            <button href="#" type="submit" class="btn btn-danger">
+                            <button type="submit" class="btn btn-danger">
                                 削除<i class="ms-1 bi-trash"></i>
                             </button>
                         </form>
