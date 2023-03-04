@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -138,10 +138,9 @@ public class TeamApplicationService {
 
         List<Student> students = studentRepository.findByTeamId(team);
 
-        List<StudentData> res = new ArrayList<>();
-
-        for (Student student : students) res.add(new StudentData(student));
-
-        return res;
+        return students.stream()
+                .sorted(Comparator.comparing(Student::getStudentNumber))
+                .map(StudentData::new)
+                .toList();
     }
 }
