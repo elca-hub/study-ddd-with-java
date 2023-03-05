@@ -15,6 +15,9 @@
         <span th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}"></span>
     </div>
 </div>
+
+<th:block th:insert="~{fragment/alert.html}"></th:block>
+
 <div class="content mt-4">
     <form method="post" th:action="@{/login}">
         <div class="mb-3">

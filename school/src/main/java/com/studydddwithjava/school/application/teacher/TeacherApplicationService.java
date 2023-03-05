@@ -1,10 +1,12 @@
 package com.studydddwithjava.school.application.teacher;
 
+import com.studydddwithjava.school.application.teacher.param.TeacherUpdateParam;
 import com.studydddwithjava.school.domain.model.teacher.ITeacherRepository;
 import com.studydddwithjava.school.domain.model.teacher.Teacher;
 import com.studydddwithjava.school.domain.model.teacher.TeacherPw;
 import com.studydddwithjava.school.domain.model.user.UserName;
 import com.studydddwithjava.school.domain.service.TeacherService;
+import com.studydddwithjava.school.infrastructure.security.LoginTeacherDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -20,15 +22,6 @@ public class TeacherApplicationService {
 
     @Autowired
     private TeacherService teacherService;
-
-    public boolean login(String firstName, String lastName, String pw) {
-        UserName teacherName = new UserName(firstName, lastName);
-        TeacherPw teacherPw = new TeacherPw(pw);
-
-        Teacher teacher = new Teacher(teacherName, teacherPw);
-
-        return this.teacherService.login(teacher) != null;
-    }
 
     /**
      * 教員を新規に登録
@@ -79,5 +72,29 @@ public class TeacherApplicationService {
         }
 
         return false;
+    }
+
+    public void update(TeacherUpdateParam teacherUpdateParam, LoginTeacherDetails loginTeacherDetails) {
+        var teacherName = new UserName(loginTeacherDetails.getUsername());
+        Optional<Teacher> optionalTeacher = teacherRepository.findByUserName(teacherName);
+
+        if (optionalTeacher.isEmpty()) throw new IllegalStateException("The information of the currently logged-in user is not registered in the DB.");
+
+        Teacher teacher = optionalTeacher.get();
+
+        if (!teacher.getHashPw().match(new TeacherPw(teacherUpdateParam.getBeforePw()))) {
+            throw new IllegalArgumentException("Password is different");
+        }
+
+        /* 更新前のパスワードが一致したら */
+        teacher.changePw(new TeacherPw(teacherUpdateParam.getPw()));
+        teacher.changeName(new UserName(teacherUpdateParam.getFirstname(), teacherUpdateParam.getLastname()));
+
+        if (!teacher.getName().getFullName().equals(loginTeacherDetails.getUsername()) &&
+                teacherService.isExistSameName(teacher)) {
+            throw new IllegalArgumentException("A user with the same name already exists.");
+        }
+
+        teacherRepository.update(teacher);
     }
 }

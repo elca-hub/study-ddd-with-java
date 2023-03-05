@@ -6,7 +6,6 @@ public class TeacherData {
     private String firstName;
     private String lastName;
     private String userName;
-
     public TeacherData(Teacher teacher) {
         this.firstName = teacher.getName().getFirstName();
         this.lastName = teacher.getName().getLastName();

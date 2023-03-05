@@ -75,4 +75,11 @@ public class TeacherRepository implements ITeacherRepository {
         TeacherDataModel model = new TeacherDataModel(teacher);
         teacherContext.delete(model);
     }
+
+    @Override
+    @Transactional
+    public void update(Teacher teacher) {
+        var model = new TeacherDataModel(teacher);
+        teacherContext.save(model);
+    }
 }
