@@ -1,5 +1,6 @@
 package com.studydddwithjava.school.controllers;
 
+import com.studydddwithjava.school.application.shared.Alert;
 import com.studydddwithjava.school.application.shared.ILogger;
 import com.studydddwithjava.school.application.shared.PageInfo;
 import com.studydddwithjava.school.application.student.StudentApplicationService;
@@ -17,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -67,7 +69,8 @@ public class TeamController {
     public String register(
             @ModelAttribute @Validated TeamRegisterParam teamRegisterParam,
             BindingResult result,
-            @AuthenticationPrincipal LoginTeacherDetails teacherDetails
+            @AuthenticationPrincipal LoginTeacherDetails teacherDetails,
+            RedirectAttributes redirectAttributes
     ) {
         if (result.hasErrors()) return "redirect:/auth/team/new?error";
         try {
@@ -76,6 +79,12 @@ public class TeamController {
             if (teamRegisterParam.getStudents() != null) {
                 teamApplicationService.joinStudents(teamId, teamRegisterParam.getStudents());
             }
+
+            redirectAttributes.addFlashAttribute("alert", new Alert(
+                    "チームの追加完了",
+                    "チームの追加が完了しました",
+                    Alert.alertColor.success
+            ));
         } catch (Exception e) {
             e.printStackTrace();
             return "redirect:/auth/team/new?error";

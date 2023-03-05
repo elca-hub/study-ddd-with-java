@@ -1,5 +1,6 @@
 package com.studydddwithjava.school.controllers;
 
+import com.studydddwithjava.school.application.shared.Alert;
 import com.studydddwithjava.school.application.shared.ILogger;
 import com.studydddwithjava.school.application.shared.PageInfo;
 import com.studydddwithjava.school.application.teacher.TeacherApplicationService;
@@ -13,6 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -34,8 +36,9 @@ public class AuthController {
     @GetMapping("/")
     public String index(
             @AuthenticationPrincipal LoginTeacherDetails teacherDetails,
-            Model model
-    ) {
+            Model model,
+            @ModelAttribute("alert") Alert alert
+            ) {
         Optional<TeacherData> optTeacher = teacherApplicationService.findByUserName(teacherDetails.getUsername());
 
         if (optTeacher.isEmpty()) return "redirect:/login?error";
@@ -44,9 +47,13 @@ public class AuthController {
 
         List<TeamData> teams = teamApplicationService.findByTeacher(teacher.getUserName());
 
+        var pageInfo = new PageInfo("管理画面");
+
+        if (alert.getMessage() != null) pageInfo.addAlert(alert);
+
         model.addAttribute("teacher", teacher);
         model.addAttribute("teams", teams);
-        model.addAttribute("pageInfo", new PageInfo("管理画面"));
+        model.addAttribute("pageInfo", pageInfo);
 
         logger.info(String.format("Succeed login. Teacher name: %s", teacher.getUserName()));
 

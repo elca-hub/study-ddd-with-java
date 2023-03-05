@@ -14,7 +14,7 @@
         <div class="team-control mb-3">
             <form method="post" th:action="@{/auth/team/__${team.id}__/delete}">
                 <button type="submit" class="btn btn-danger">
-                    チームを削除する<i class="ms-1 bi-trash"></i>
+                    チームを削除する<i class="ms-1 bi bi-trash"></i>
                 </button>
             </form>
         </div>
@@ -33,7 +33,7 @@
                     <td>
                         <form method="post" th:action="@{/auth/team/__${team.id}__/__${student.id}__/remove}">
                             <button type="submit" class="btn btn-danger">
-                                削除<i class="ms-1 bi-trash"></i>
+                                削除<i class="ms-1 bi bi-trash"></i>
                             </button>
                         </form>
                     </td>

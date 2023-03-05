@@ -1,0 +1,5 @@
+<div th:class="|alert alert-${alert.alertColor} alert-dismissible fade show|" role="alert" th:each="alert: ${pageInfo.alerts}">
+  <i th:class="|me-1 flex-shrink-0 bi bi-${alert.iconName}|"></i>
+  <strong th:text="${alert.title}"></strong><th:block th:text="${alert.message}" />
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
