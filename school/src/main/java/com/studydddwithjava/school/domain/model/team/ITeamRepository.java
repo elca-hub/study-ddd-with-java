@@ -14,4 +14,6 @@ public interface ITeamRepository {
 
     void removeStudent(Student student);
     void delete(Team team);
+
+    List<Team> findByStudent(Student student);
 }

@@ -73,4 +73,10 @@ public class StudentApplicationService {
 
         return students.stream().map(StudentData::new).toList();
     }
+
+    public Optional<StudentData> findById(String studentId) {
+        Optional<Student> optionalStudent = studentRepository.findById(studentId);
+
+        return optionalStudent.map(StudentData::new);
+    }
 }

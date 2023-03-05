@@ -24,12 +24,18 @@
                     <th scope="col">生徒番号</th>
                     <th scope="col">氏名</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="student, studentStat : ${students}">
                     <th scope="row" th:text="${student.studentNumber}"></th>
                     <td th:text="${student.username}"></td>
+                    <td>
+                        <a th:href="|/auth/student/${student.id}|" class="btn btn-success">
+                            生徒詳細へ
+                        </a>
+                    </td>
                     <td>
                         <form method="post" th:action="@{/auth/team/__${team.id}__/__${student.id}__/remove}">
                             <button type="submit" class="btn btn-danger">

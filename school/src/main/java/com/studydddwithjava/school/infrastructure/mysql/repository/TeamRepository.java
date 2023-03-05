@@ -82,4 +82,14 @@ public class TeamRepository implements ITeamRepository {
 
         teamContext.deleteById(team.getId());
     }
+
+    @Override
+    public List<Team> findByStudent(Student student) {
+        List<TeamDataModel> teamDataModels = studentTeamMembershipContext.findTeamByStudentId(student.getId());
+
+        return teamDataModels.stream().map(model -> new Team(
+                model.id,
+                new TeamName(model.name)
+        )).toList();
+    }
 }

@@ -1,10 +1,11 @@
 package com.studydddwithjava.school.controllers;
 
+import com.studydddwithjava.school.application.shared.ILogger;
 import com.studydddwithjava.school.application.shared.PageInfo;
 import com.studydddwithjava.school.application.student.StudentApplicationService;
+import com.studydddwithjava.school.application.student.StudentData;
 import com.studydddwithjava.school.application.student.param.StudentRegisterParam;
 import com.studydddwithjava.school.application.team.TeamApplicationService;
-import com.studydddwithjava.school.application.shared.ILogger;
 import com.studydddwithjava.school.application.team.TeamData;
 import com.studydddwithjava.school.infrastructure.security.LoginTeacherDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/auth/student")
@@ -30,6 +32,36 @@ public class StudentController {
     @Autowired
     @Qualifier("slf4j")
     private ILogger logger;
+
+    @GetMapping("/{studentId}")
+    public String home(
+            @PathVariable String studentId,
+            Model model
+    ) {
+        Optional<StudentData> optionalStudentData = studentApplicationService.findById(studentId);
+
+        model.addAttribute("isEmpty", optionalStudentData.isEmpty());
+
+        var pageInfo = new PageInfo("");
+
+        if (optionalStudentData.isPresent()) {
+            StudentData student = optionalStudentData.get();
+
+            model.addAttribute("student", student);
+
+            List<TeamData> teams = teamApplicationService.findByStudentId(studentId);
+
+            model.addAttribute("teams", teams);
+
+            pageInfo.setTitle(student.getUsername() + "の情報");
+        } else {
+            pageInfo.setTitle("生徒情報が見つかりませんでした");
+        }
+
+        model.addAttribute("pageInfo", pageInfo);
+
+        return "/auth/student/home";
+    }
 
     @GetMapping("/new")
     public String newStudent (

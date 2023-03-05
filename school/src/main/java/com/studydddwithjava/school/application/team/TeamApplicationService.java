@@ -139,4 +139,16 @@ public class TeamApplicationService {
                 .map(StudentData::new)
                 .toList();
     }
+
+    public List<TeamData> findByStudentId(String studentId) {
+        Optional<Student> optionalStudent = studentRepository.findById(studentId);
+
+        if (optionalStudent.isEmpty()) throw new IllegalArgumentException();
+
+        Student student = optionalStudent.get();
+
+        List<Team> teams = teamRepository.findByStudent(student);
+
+        return teams.stream().map(TeamData::new).toList();
+    }
 }
