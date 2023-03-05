@@ -7,3 +7,11 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.main-title {
+    text-align: center;
+}
+
+.main-title h1 {
+    font-size: 3rem;
+}
