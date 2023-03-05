@@ -25,6 +25,7 @@ public class PageInfo {
     }
 
     public void addAlert(Alert alert) {
+        if (alert.getMessage() == null) return;
         alerts.add(alert);
     }
 }

@@ -7,13 +7,13 @@
 <body>
 <div class="main-title mb-4">
     <h1>School Management</h1>
-    <h2>グループ作成画面</h2>
+    <h2>チーム作成画面</h2>
 </div>
 <div class="content mt-4">
     <form th:action="@{/auth/team/register}" method="post">
         <div class="mb-3">
-            <label for="groupName" class="form-label">グループ名</label>
-            <input type="text" class="form-control" id="groupName" placeholder="グループ名" name="groupName">
+            <label for="groupName" class="form-label">チーム名</label>
+            <input type="text" class="form-control" id="groupName" placeholder="チーム名" name="groupName">
         </div>
         <label for="groupName" class="form-label mt-4">参加する生徒</label>
         <div class="student-check-list p-2 mb-4" id="student-check-list">
