@@ -119,7 +119,7 @@ public class AuthController {
 
         redirectAttributes.addFlashAttribute(new Alert(
                 "更新完了",
-                "データの更新が完了しました",
+                "データの更新が完了しました。再度ログインしてください。",
                 Alert.alertColor.success
         ));
 

@@ -34,8 +34,10 @@ public class SchoolController {
     }
 
     @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("pageInfo", new PageInfo("ログイン"));
+    public String login(Model model, @ModelAttribute Alert alert) {
+        var pageInfo = new PageInfo("ログイン");
+        pageInfo.addAlert(alert);
+        model.addAttribute("pageInfo", pageInfo);
         return "login";
     }
 
