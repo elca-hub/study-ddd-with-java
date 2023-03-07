@@ -28,17 +28,14 @@ public class TeacherApplicationService {
      * @param firstName 姓
      * @param lastName 名
      * @param pw パスワード
-     * @return 登録が完了したか
      */
-    public boolean register(String firstName, String lastName, String pw) throws IllegalArgumentException {
+    public void register(String firstName, String lastName, String pw) throws IllegalArgumentException, IllegalStateException {
         UserName teacherName = new UserName(firstName, lastName);
         Teacher teacher = new Teacher(teacherName, new TeacherPw(pw));
 
-        if (teacherRepository.findByUserName(teacherName).isPresent()) return false;
+        if (teacherRepository.findByUserName(teacherName).isPresent()) throw new IllegalStateException("There is already a faculty member with the same name.");
 
         teacherRepository.save(teacher);
-
-        return true;
     }
 
     public Optional<TeacherData> findByUserName(String userName) {
