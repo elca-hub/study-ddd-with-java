@@ -36,8 +36,11 @@ public class ApplicationTest {
 
     @BeforeEach
     public void setup() {
-        boolean isDone = teacherApplicationService.register(firstname, lastname, rawPw);
-        if (!isDone) System.out.println("既にテストユーザが登録済です");
+        try {
+            teacherApplicationService.register(firstname, lastname, rawPw);
+        } catch (IllegalStateException e) {
+            System.out.println("既にテストユーザが登録済みです");
+        }
     }
 
     @Test
