@@ -57,8 +57,11 @@ public class TeamController {
     }
 
     @GetMapping("/new")
-    public String newTeam(Model model) {
-        List<StudentData> students = studentApplicationService.fetchStudents();
+    public String newTeam(
+            Model model,
+            @AuthenticationPrincipal LoginTeacherDetails loginTeacherDetails
+    ) {
+        List<StudentData> students = studentApplicationService.fetchStudents(loginTeacherDetails.getUsername());
 
         model.addAttribute("students", students);
         model.addAttribute("pageInfo", new PageInfo("チームの新規追加"));

@@ -1,10 +1,13 @@
 package com.studydddwithjava.school.infrastructure.mysql.repository;
 
+import com.studydddwithjava.school.domain.model.student.Student;
 import com.studydddwithjava.school.domain.model.teacher.ITeacherRepository;
 import com.studydddwithjava.school.domain.model.teacher.Teacher;
 import com.studydddwithjava.school.domain.model.teacher.TeacherHashPw;
 import com.studydddwithjava.school.domain.model.user.UserName;
+import com.studydddwithjava.school.infrastructure.mysql.context.StudentContext;
 import com.studydddwithjava.school.infrastructure.mysql.context.TeacherContext;
+import com.studydddwithjava.school.infrastructure.mysql.entity.StudentDataModel;
 import com.studydddwithjava.school.infrastructure.mysql.entity.TeacherDataModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,6 +20,9 @@ import java.util.Optional;
 public class TeacherRepository implements ITeacherRepository {
     @Autowired
     private TeacherContext teacherContext;
+
+    @Autowired
+    private StudentContext studentContext;
 
     @Override
     public Teacher findByUserNameAndPw(Teacher teacher) {
@@ -81,5 +87,18 @@ public class TeacherRepository implements ITeacherRepository {
     public void update(Teacher teacher) {
         var model = new TeacherDataModel(teacher);
         teacherContext.save(model);
+    }
+
+    @Override
+    public List<Student> fetchStudent(Teacher teacher) {
+        List<StudentDataModel> studentDataModels = studentContext.findByTeacherId(teacher.getId());
+
+        return studentDataModels.stream().map(column -> new Student(
+                column.id,
+                new UserName(column.firstname, column.lastname),
+                -1,
+                null,
+                teacher
+        )).toList();
     }
 }

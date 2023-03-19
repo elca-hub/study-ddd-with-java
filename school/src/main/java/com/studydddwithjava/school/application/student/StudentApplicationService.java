@@ -68,7 +68,13 @@ public class StudentApplicationService {
         studentRepository.save(student);
     }
 
-    public List<StudentData> fetchStudents() {
+    public List<StudentData> fetchStudents(String teacherName) {
+        Optional<Teacher> optionalTeacher = teacherRepository.findByUserName(new UserName(teacherName));
+
+        if (optionalTeacher.isEmpty()) throw new IllegalStateException("You are not logged in correctly.");
+
+        Teacher teacher = optionalTeacher.get();
+
         List<Student> students = studentRepository.findAll();
 
         return students.stream().map(StudentData::new).toList();

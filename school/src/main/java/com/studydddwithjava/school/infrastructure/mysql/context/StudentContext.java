@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface StudentContext extends JpaRepository<StudentDataModel, String> {
     List<StudentDataModel> findByIdIn(List<String> studentIds);
+
+    List<StudentDataModel> findByTeacherId(String teacherId);
 }
