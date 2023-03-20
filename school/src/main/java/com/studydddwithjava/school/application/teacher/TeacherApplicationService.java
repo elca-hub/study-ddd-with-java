@@ -2,18 +2,17 @@ package com.studydddwithjava.school.application.teacher;
 
 import com.studydddwithjava.school.application.student.StudentData;
 import com.studydddwithjava.school.application.teacher.param.TeacherUpdateParam;
+import com.studydddwithjava.school.domain.model.student.Student;
 import com.studydddwithjava.school.domain.model.teacher.ITeacherRepository;
 import com.studydddwithjava.school.domain.model.teacher.Teacher;
 import com.studydddwithjava.school.domain.model.teacher.TeacherPw;
 import com.studydddwithjava.school.domain.model.user.UserName;
 import com.studydddwithjava.school.domain.service.TeacherService;
 import com.studydddwithjava.school.infrastructure.security.LoginTeacherDetails;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -100,6 +99,14 @@ public class TeacherApplicationService {
     }
 
     public List<StudentData> fetchStudent(String teacherName)  {
-        Optional<Teacher> optionalTeacher =
+        Optional<Teacher> optionalTeacher = teacherRepository.findByUserName(new UserName(teacherName));
+
+        if (optionalTeacher.isEmpty()) throw new IllegalStateException();
+
+        Teacher teacher = optionalTeacher.get();
+
+        List<Student> students = teacherRepository.fetchStudent(teacher);
+
+        return students.stream().map(StudentData::new).toList();
     }
 }
