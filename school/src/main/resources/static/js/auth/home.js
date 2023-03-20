@@ -6,6 +6,7 @@ function createStudentElements(students) {
             <th scope="col">生徒番号</th>
             <th scope="col">姓</th>
             <th scope="col">名</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -23,6 +24,9 @@ function createStudentElements(students) {
             <th scope="row">${student.studentNumber}</th>
             <td>${student.firstname}</td>
             <td>${student.lastname}</td>
+            <td>
+                <a href="/auth/student/${student.id}" class="btn btn-outline-success">生徒詳細画面へ</a>
+            </td>
         </tr>
         `;
     }
