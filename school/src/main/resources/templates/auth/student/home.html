@@ -14,11 +14,23 @@
             <thead>
                 <tr>
                     <th scope="col">チーム名</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="team, teamStat : ${teams}">
-                    <th scope="row" th:text="${team.name}"></th>
+                    <td th:text="${team.name}"></td>
+                    <td>
+                        <form
+                                method="post"
+                                th:action="@{/auth/student/__${student.id}__/__${team.id}__/remove}"
+                                name="removeTeam"
+                        >
+                        </form>
+                        <button th:onclick="|createConfirmBox('removeTeam', '__${team.name}__を脱退します。よろしいですか？')|" class="btn btn-danger">
+                            脱退<i class="ms-1 bi bi-trash"></i>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
