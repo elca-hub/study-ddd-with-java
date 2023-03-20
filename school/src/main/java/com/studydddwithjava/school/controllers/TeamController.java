@@ -6,6 +6,7 @@ import com.studydddwithjava.school.application.shared.PageInfo;
 import com.studydddwithjava.school.application.student.StudentApplicationService;
 import com.studydddwithjava.school.application.student.StudentData;
 import com.studydddwithjava.school.application.student.param.FetchTeamMemberParam;
+import com.studydddwithjava.school.application.teacher.TeacherApplicationService;
 import com.studydddwithjava.school.application.team.TeamApplicationService;
 import com.studydddwithjava.school.application.team.TeamData;
 import com.studydddwithjava.school.application.team.param.TeamRegisterParam;
@@ -31,6 +32,9 @@ public class TeamController {
 
     @Autowired
     private StudentApplicationService studentApplicationService;
+
+    @Autowired
+    private TeacherApplicationService teacherApplicationService;
 
     @Autowired
     @Qualifier("slf4j")
@@ -61,7 +65,7 @@ public class TeamController {
             Model model,
             @AuthenticationPrincipal LoginTeacherDetails loginTeacherDetails
     ) {
-        List<StudentData> students = studentApplicationService.fetchStudents(loginTeacherDetails.getUsername());
+        List<StudentData> students = teacherApplicationService.fetchStudent(loginTeacherDetails.getUsername());
 
         model.addAttribute("students", students);
         model.addAttribute("pageInfo", new PageInfo("チームの新規追加"));
