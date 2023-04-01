@@ -12,7 +12,7 @@
 
 
 /* confirm関連 */
-const CONFIRM_ID_PHRASE = 'tree-confirm-box'; // 確認画面で用いるidの固定値
+const CONFIRM_ID_PHRASE = 'confirm-box'; // 確認画面で用いるidの固定値
 let CONFIRM_TARGET_INFO = {
   id: '',
   formName: ''
@@ -32,6 +32,12 @@ function changeDarkMode() {
     htmlEle[0].setAttribute('data-bs-theme', START_DARK_HOUR <= hour || hour <= END_DARK_HOUR ? 'dark' : 'light');
 }
 
+
+/**
+ * confirmIdに対応したポップアップを削除
+ * 
+ * @param confirmId 認証用のポップアップを作成したときに生成したid
+ */
 async function removeConfirmBox (confirmId) {
     if (confirmId !== CONFIRM_TARGET_INFO.id) throw new Error('Invalid id of confirm.');
   
@@ -43,7 +49,13 @@ async function removeConfirmBox (confirmId) {
   
     document.getElementById(CONFIRM_ID_PHRASE).remove();
 }
-  
+
+/**
+ * confirmIdに対応したポップアップの確定ボタンが押させた時に実行する関数。
+ * confirmIdに対応するconfirmNameのformを確定し、ポップアップを削除する
+ * 
+ * @param confirmId 認証用のポップアップを作成した時に生成したid
+ */  
 async function admitConfirm (confirmId) {
     if (confirmId !== CONFIRM_TARGET_INFO.id) throw new Error('Invalid id of confirm.');
     
@@ -52,31 +64,38 @@ async function admitConfirm (confirmId) {
     await removeConfirmBox(confirmId);
 }
 
+/**
+ * ポップアップを生成
+ * 
+ * @param formName 確定ボタンが押された時に実行したいフォームの名前
+ * @param message ポップアップに表示するメッセージ
+ */
 async function createConfirmBox(formName, message = '') {
     // 既に表示されていたら
     if (document.getElementById(CONFIRM_ID_PHRASE) !== null) {
-      if (typeof CONFIRM_TARGET_INFO.id === 'undefined') document.getElementById(CONFIRM_ID_PHRASE).remove();
-      else await removeConfirmBox(CONFIRM_TARGET_INFO.id);
+        if (typeof CONFIRM_TARGET_INFO.id === 'undefined') document.getElementById(CONFIRM_ID_PHRASE).remove();
+        else await removeConfirmBox(CONFIRM_TARGET_INFO.id);
     }
     const div = document.createElement('div');
-    div.classList.add('tree-confirm-box');
+    div.classList.add('confirm-box');
     div.setAttribute('id', CONFIRM_ID_PHRASE);
 
-    const id = Math.random().toString(32).substring(2);
+    const id = Math.random().toString(32).substring(2); // idの生成
 
     CONFIRM_TARGET_INFO.id = id;
     CONFIRM_TARGET_INFO.formName = formName;
 
+    /* ポップアップの生成 */
     div.innerHTML = `
-      <div class="tree-confirm-content-box">
+      <div class="confirm-content-box">
         <h3>確認</h3>
         <p>${message}</p>
-        <div class="tree-confirm-button-box">
-          <button onclick="removeConfirmBox('${id}')" class="tree-button tree-button-mini">
+        <div class="confirm-button-box">
+          <button onclick="removeConfirmBox('${id}')" class="btn btn-outline-warning">
             戻る
             <i class="bi bi-arrow-clockwise"></i>
           </button>
-          <button onclick="admitConfirm('${id}')" class="tree-button tree-button-mini tree-button-danger">
+          <button onclick="admitConfirm('${id}')" class="btn btn-outline-danger">
             確認
             <i class="bi bi-check"></i>
           </button>
