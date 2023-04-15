@@ -1,5 +1,6 @@
 package com.studydddwithjava.school.controllers;
 
+import com.studydddwithjava.school.application.shared.Alert;
 import com.studydddwithjava.school.application.shared.ILogger;
 import com.studydddwithjava.school.application.shared.PageInfo;
 import com.studydddwithjava.school.application.student.StudentApplicationService;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -66,13 +68,18 @@ public class StudentController {
     @GetMapping("/new")
     public String newStudent (
             Model model,
-            @AuthenticationPrincipal LoginTeacherDetails teacherDetails
+            @AuthenticationPrincipal LoginTeacherDetails teacherDetails,
+            @ModelAttribute Alert alert
     ) {
         List<TeamData> teams = teamApplicationService.findByTeacher(teacherDetails.getUsername());
 
         model.addAttribute("teams", teams);
 
-        model.addAttribute("pageInfo", new PageInfo("生徒の新規追加"));
+        var pageInfo = new PageInfo("生徒の新規追加");
+
+        pageInfo.addAlert(alert);
+
+        model.addAttribute("pageInfo", pageInfo);
 
         return "/auth/student/new";
     }
@@ -81,18 +88,33 @@ public class StudentController {
     public String register(
             @ModelAttribute @Validated StudentRegisterParam studentRegisterParam,
             BindingResult result,
-            @AuthenticationPrincipal LoginTeacherDetails teacherDetails
+            @AuthenticationPrincipal LoginTeacherDetails teacherDetails,
+            RedirectAttributes redirectAttributes
     ) {
-        if (result.hasErrors()) return "redirect:/auth/student/new?error";
+        var redirectUrl = "/auth/student/new";
+
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute(new Alert(
+                    "フォームの不備",
+                    "フォームの入力内容に不備があります。",
+                    Alert.alertColor.warning
+            ));
+
+            return "redirect:" + redirectUrl;
+        }
 
         try {
             studentApplicationService.register(studentRegisterParam, teacherDetails.getUsername());
         } catch (Exception e) {
             e.printStackTrace();
 
-            return "redirect:/auth/student/new?error";
+            redirectAttributes.addFlashAttribute(new Alert(
+                    "追加失敗",
+                    "生徒の追加に失敗しました。内容を確認の上、もう一度お試しください.",
+                    Alert.alertColor.danger
+            ));
         }
 
-        return "redirect:/auth/";
+        return "redirect:" + redirectUrl;
     }
 }

@@ -9,8 +9,11 @@
     <h1>School Management</h1>
     <h2>生徒の新規登録画面</h2>
 </div>
+
+<th:block th:insert="~{fragment/alert.html}"></th:block>
+
 <div class="content mt-4">
-    <form th:action="@{/auth/student/register}" method="post">
+    <form th:action="@{/auth/student/register}" method="post" class="common-form-layout">
         <div class="mb-3">
             <label for="studentFirstName" class="form-label">生徒名（姓）</label>
             <input type="text" class="form-control" id="studentFirstName" placeholder="生徒の姓" name="firstname">
