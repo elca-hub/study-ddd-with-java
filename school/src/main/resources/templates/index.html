@@ -5,13 +5,40 @@
         <link rel="stylesheet" href="/css/index.css">
     </head>
 <body>
-<div class="main-title mb-4">
-    <h1>School Management</h1>
-    <h2>教員向けの生徒管理システム</h2>
-</div>
-<div class="content mt-4">
-    <a href="/login">ログイン画面へ</a>
-    <a href="/signup">新規登録</a>
-</div>
+    <div class="home-box text-center">
+        <h1>School Management</h1>
+        <h2>教員向けの生徒管理システム</h2>
+        <div class="container my-4">
+            <div class="row">
+                <div class="col">
+                    <a href="/login" class="btn btn-primary">
+                        <p class="mb-0">
+                            <i class="bi bi-door-open"></i>
+                            ログイン
+                        </p>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="/signup" class="btn btn-success">
+                        <p class="mb-0">
+                            <i class="bi bi-person-plus"></i>
+                            新規登録
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="attention-box mt-4">
+            <h3 class="text-warning">
+                <i class="bi bi-exclamation-triangle"></i>
+                注意
+                <i class="bi bi-exclamation-triangle"></i>
+            </h3>
+            <p>
+                このシステムはテスト版であり、セキュリティ面、機能面等に大きな問題が潜んでいる可能性があります。<br>
+                また、このシステムは高頻度で変更が加えられます。変更内容等については<a href="https://github.com/elca-hub/study-ddd-with-java">github</a>からご覧ください。
+            </p>
+        </div>
+    </div>
 </body>
 </html>
