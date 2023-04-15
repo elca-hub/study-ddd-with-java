@@ -135,23 +135,6 @@ public class StudentRepository implements IStudentRepository {
         studentContext.deleteById(studentId);
     }
 
-    /**
-     * DBに登録されている生徒を取得。ただし生徒番号、教師、チームは取得しない
-     * @return DBに登録されている生徒全員
-     */
-    @Override
-    public List<Student> findAll() {
-        List<StudentDataModel> studentDataModels = studentContext.findAll();
-
-        return studentDataModels.stream().map(model -> new Student(
-                model.id,
-                new UserName(model.firstname, model.lastname),
-                -1,
-                null,
-                null
-        )).toList();
-    }
-
     @Override
     public List<Student> fetchStudents(List<String> studentIds) {
         List<StudentDataModel> studentDataModels = studentContext.findByIdIn(studentIds);
