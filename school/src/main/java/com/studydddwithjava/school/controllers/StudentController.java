@@ -110,7 +110,7 @@ public class StudentController {
 
             redirectAttributes.addFlashAttribute(new Alert(
                     "追加失敗",
-                    "生徒の追加に失敗しました。内容を確認の上、もう一度お試しください.",
+                    e.getMessage(),
                     Alert.alertColor.danger
             ));
             return "redirect:" + redirectUrl;

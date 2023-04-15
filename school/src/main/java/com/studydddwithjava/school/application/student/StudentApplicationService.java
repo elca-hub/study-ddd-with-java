@@ -51,18 +51,14 @@ public class StudentApplicationService {
         );
 
         if (studentService.isExistInTeam(student)) {
-            throw new IllegalArgumentException(String.format(
-                    "A student with that name cannot be registered because he/she already exists in the team.\n Student name: %s",
-                    student.getName().getFullName()));
+            throw new IllegalArgumentException("既にその名前の人は存在しているため、追加することができません。");
         }
 
         if (studentRegisterParam.isAutoInc()) {
             int autoStudentNumber = studentService.makeStudentNumber(team);
             student.changeStudentNumber(autoStudentNumber);
         } else if (studentService.isExistStudentNumberInTeam(student, team)){
-            throw new IllegalArgumentException(String.format(
-                    "That student number is already in use and cannot be used.\n Student number: %d",
-                    student.getStudentNumber()));
+            throw new IllegalArgumentException("既にその生徒番号は使用されているため、追加できません。別の生徒番号を登録してください。");
         }
         studentRepository.save(student);
     }
