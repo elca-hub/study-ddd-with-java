@@ -18,24 +18,22 @@
 
 <th:block th:insert="~{fragment/alert.html}"></th:block>
 
-<div class="content mt-4">
-    <form method="post" th:action="@{/login}">
-        <div class="mb-3">
-            <label for="teacherFirstName" class="form-label">姓</label>
-            <input type="text" class="form-control" id="teacherFirstName" placeholder="苗字" name="firstname" autocomplete="family-name">
-        </div>
-        <div class="mb-3">
-            <label for="teacherFirstName" class="form-label">名</label>
-            <input type="text" class="form-control" id="teacherLastName" placeholder="名前" name="lastname" autocomplete="given-name">
-        </div>
-        <div class="mb-3">
-            <label for="teacherPw" class="form-label">パスワード</label>
-            <input type="password" class="form-control" id="teacherPw" placeholder="パスワード" name="pw">
-        </div>
-        <input type="hidden" id="userName" name="username">
-        <button type="submit" class="btn btn-primary">確定</button>
-    </form>
-</div>
+<form method="post" th:action="@{/login}" class="common-form-layout">
+    <div class="mb-3">
+        <label for="teacherFirstName" class="form-label">姓</label>
+        <input type="text" class="form-control" id="teacherFirstName" placeholder="苗字" name="firstname" autocomplete="family-name">
+    </div>
+    <div class="mb-3">
+        <label for="teacherFirstName" class="form-label">名</label>
+        <input type="text" class="form-control" id="teacherLastName" placeholder="名前" name="lastname" autocomplete="given-name">
+    </div>
+    <div class="mb-3">
+        <label for="teacherPw" class="form-label">パスワード</label>
+        <input type="password" class="form-control" id="teacherPw" placeholder="パスワード" name="pw">
+    </div>
+    <input type="hidden" id="userName" name="username">
+    <button type="submit" class="btn btn-primary">確定</button>
+</form>
 <script src="/js/login.js"></script>
 </body>
 </html>

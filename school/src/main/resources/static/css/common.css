@@ -17,6 +17,12 @@ body {
     font-size: 3rem;
 }
 
+/* フォームのレイアウトをいい感じにするクラス。formタグに直接付与する */
+.common-form-layout {
+  width: 50vw;
+  margin: auto;
+}
+
 /* 許可を求めるポップアップ関係 */
 
 .confirm-box {
