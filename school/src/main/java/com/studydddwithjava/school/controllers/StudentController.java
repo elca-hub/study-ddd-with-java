@@ -113,8 +113,9 @@ public class StudentController {
                     "生徒の追加に失敗しました。内容を確認の上、もう一度お試しください.",
                     Alert.alertColor.danger
             ));
+            return "redirect:" + redirectUrl;
         }
 
-        return "redirect:" + redirectUrl;
+        return "redirect:/auth/";
     }
 }
