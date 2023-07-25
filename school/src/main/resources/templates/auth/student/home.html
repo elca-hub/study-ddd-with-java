@@ -25,6 +25,7 @@
                                 method="post"
                                 th:action="@{/auth/student/__${student.id}__/__${team.id}__/remove}"
                                 name="removeTeam"
+                                id="removeTeam"
                         >
                         </form>
                         <button th:onclick="|createConfirmBox('removeTeam', '__${team.name}__を脱退します。よろしいですか？')|" class="btn btn-danger">

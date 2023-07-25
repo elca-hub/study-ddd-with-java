@@ -59,7 +59,7 @@ async function removeConfirmBox (confirmId) {
 async function admitConfirm (confirmId) {
     if (confirmId !== CONFIRM_TARGET_INFO.id) throw new Error('Invalid id of confirm.');
     
-    document[CONFIRM_TARGET_INFO.formName].submit();
+    document.forms[CONFIRM_TARGET_INFO.formName].submit();
   
     await removeConfirmBox(confirmId);
 }
